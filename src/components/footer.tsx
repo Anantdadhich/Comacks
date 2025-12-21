@@ -1,9 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 import { ArrowUpRight, Plus, Radio } from 'lucide-react';
+import { AnimatedSection } from './ui/animated-section';
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#050505] text-white border-t border-white/5 overflow-hidden">
+    <AnimatedSection className="relative bg-[#050505] text-white border-t border-white/5 overflow-hidden">
       
       {/* --- Background Texture --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -17,18 +19,27 @@ export function Footer() {
           
           {/* Brand Column */}
           <div className="max-w-md">
-            <div className="flex items-center gap-2 mb-6">
-                <div className="w-4 h-4 bg-white rounded-sm"></div>
-                <span className="text-sm font-bold tracking-widest uppercase">Comacks</span>
-            </div>
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
+                {/* 3-Bar Logo Icon (Matching Header) */}
+                <div className="flex gap-[3px]">
+                    <div className="h-4 w-1 bg-white rounded-sm transition-all group-hover:h-5"></div>
+                    <div className="h-4 w-1 bg-white/70 rounded-sm transition-all group-hover:h-3"></div>
+                    <div className="h-4 w-1 bg-red-600 rounded-sm transition-all group-hover:h-4"></div>
+                </div>
+                {/* Text Logo */}
+                <span className="text-sm font-bold tracking-[0.2em] uppercase">
+                  <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks
+                </span>
+            </Link>
+            
             <p className="text-zinc-500 text-sm leading-relaxed mb-8">
               AI-Powered Automation & Digital Solutions designed specifically for the growth of Australian Healthcare Clinics.
             </p>
+            
             <div className="flex items-center gap-4">
-               {/* Social placeholders using simple text/icons */}
-               <SocialLink label="LinkedIn" />
-               <SocialLink label="Twitter" />
-               <SocialLink label="Instagram" />
+               {/* Social Links */}
+               <SocialLink href="https://www.linkedin.com/company/Comacks/" label="LinkedIn" />
+               <SocialLink href="https://www.instagram.com/comacks.growth/" label="Instagram" />
             </div>
           </div>
 
@@ -38,26 +49,26 @@ export function Footer() {
             <div>
               <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Services</h4>
               <ul className="space-y-4 text-sm text-zinc-500 font-medium">
-                <li><a href="#" className="hover:text-red-400 transition-colors flex items-center gap-1">AI Automation</a></li>
-                <li><a href="#" className="hover:text-red-400 transition-colors flex items-center gap-1">Digital Solutions</a></li>
-                <li><a href="#" className="hover:text-red-400 transition-colors flex items-center gap-1">Social Media</a></li>
+                <li><Link href="/ai-automation" className="hover:text-red-400 transition-colors flex items-center gap-1">AI Automation</Link></li>
+                <li><Link href="/digital-solutions" className="hover:text-red-400 transition-colors flex items-center gap-1">Digital Solutions</Link></li>
+                <li><Link href="/smm" className="hover:text-red-400 transition-colors flex items-center gap-1">Social Media</Link></li>
               </ul>
             </div>
             
             <div>
               <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Company</h4>
               <ul className="space-y-4 text-sm text-zinc-500 font-medium">
-                <li><a href="#" className="hover:text-red-400 transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-red-400 transition-colors">Case Studies</a></li>
-                <li><a href="#" className="hover:text-red-400 transition-colors">Contact</a></li>
+                <li><Link href="/about" className="hover:text-red-400 transition-colors">About Us</Link></li>
+                <li><Link href="/case-studies" className="hover:text-red-400 transition-colors">Case Studies</Link></li>
+                <li><Link href="/contact" className="hover:text-red-400 transition-colors">Contact</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Legal</h4>
               <ul className="space-y-4 text-sm text-zinc-500 font-medium">
-                <li><a href="#" className="hover:text-red-400 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-red-400 transition-colors">Terms of Service</a></li>
+                <li><Link href="/privacy" className="hover:text-red-400 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-red-400 transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
 
@@ -75,12 +86,18 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-                <span>System Status: Online</span>
+                <a href="mailto:arpit@comacks.com" className="hover:text-white transition-colors">
+                  arpit@comacks.com
+                </a>
+             </div>
+             <div className="flex items-center gap-2">
+                <a href="tel:+917303908344" className="hover:text-white transition-colors">
+                  +91 7303908344
+                </a>
              </div>
              <div className="flex items-center gap-2">
                 <Radio className="w-3 h-3" />
-                <span>Sydney, AU</span>
+                <span>New Delhi, India</span>
              </div>
           </div>
 
@@ -91,13 +108,13 @@ export function Footer() {
         <div className="absolute bottom-8 right-0 text-zinc-800 hidden md:block"><Plus strokeWidth={1} className="w-4 h-4" /></div>
 
       </div>
-    </footer>
+    </AnimatedSection>
   );
 }
 
-function SocialLink({ label }: { label: string }) {
+function SocialLink({ href, label }: { href: string, label: string }) {
     return (
-        <a href="#" className="text-xs font-bold text-zinc-500 uppercase tracking-wider hover:text-white flex items-center gap-1 transition-colors group">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-zinc-500 uppercase tracking-wider hover:text-white flex items-center gap-1 transition-colors group">
             {label}
             <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
         </a>

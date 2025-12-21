@@ -36,10 +36,10 @@ export function Header() {
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         
-        {/* --- Left Side: Logo & Desktop Nav --- */}
+       
         <div className="flex items-center gap-12">
           
-          {/* Logo Icon Mockup (Updated with Red) */}
+         
           <Link href="/" className="flex items-center gap-4 group">
             <div className="flex items-center gap-1">
               <div className="flex gap-[3px]">
@@ -50,9 +50,9 @@ export function Header() {
               </div>
               <div className="h-6 w-px bg-white/10 mx-2 hidden sm:block"></div>
             </div>
-            <span className="text-sm font-bold tracking-[0.2em] uppercase text-white hidden sm:block">
-              Comacks
-            </span>
+          <span className="text-sm font-bold tracking-[0.2em] uppercase text-white hidden sm:block">
+  <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks
+</span>
           </Link>
 
           {/* Desktop Navigation (Comma Separated) */}
@@ -64,10 +64,10 @@ export function Header() {
             {/* Services Dropdown */}
             <div className="relative group">
               <button
-                className="flex items-center gap-1 hover:text-white transition-colors"
+                className="flex items-center gap-1 hover:text-white transition-colors font-bold"
                 onClick={() => setServicesOpen(!servicesOpen)}
               >
-                Services
+                SERVICES
                 <ChevronDown className="w-3 h-3" />
               </button>
               
@@ -91,11 +91,12 @@ export function Header() {
 
         {/* --- Right Side: Actions --- */}
         <div className="flex items-center gap-6">
-          <Link href="/contact" className="hidden md:block">
-            <div className="px-6 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white text-white hover:text-black transition-all duration-300 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm">
-              Book Consultation
-            </div>
-          </Link>
+          <button 
+            onClick={() => window.location.href = 'mailto:arpit@comacks.com?subject=Free Consultation Request&body=Hi, I would like to book a free consultation for my clinic.'}
+            className="hidden md:block px-6 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white text-white hover:text-black transition-all duration-300 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm"
+          >
+            Book Consultation
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -122,13 +123,15 @@ export function Header() {
 
           <div className="h-px w-full bg-white/10 my-2"></div>
 
-          <Link
-            href="/contact"
-            onClick={() => setIsMenuOpen(false)}
+          <button
+            onClick={() => {
+              
+              setIsMenuOpen(false);
+            }}
             className="text-white text-2xl font-semibold flex items-center gap-2"
           >
             Book Consultation <span className="text-red-500">&rarr;</span>
-          </Link>
+          </button>
         </div>
       </div>
     </header>

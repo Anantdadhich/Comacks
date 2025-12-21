@@ -8,13 +8,13 @@ import { CaseStudies } from '@/components/home/case-studies';
 
 export default function Home() {
   return (
-    <main className="flex-1 bg-[#050505]">
+     <div>
       <Hero />
       <Services></Services>
       <WhyChooseUs></WhyChooseUs>
       <CaseStudies></CaseStudies>
       <Testimonials />
       <CTA />
-    </main>
+     </div>
   );
 }

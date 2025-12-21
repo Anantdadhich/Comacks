@@ -1,9 +1,10 @@
 import React from 'react';
 import { CheckCircle, Award, Users, ShieldCheck, Plus } from 'lucide-react';
+import { AnimatedSection } from '../ui/animated-section';
 
 export function WhyChooseUs() {
   return (
-    <section className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
+    <AnimatedSection className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
       
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -92,7 +93,7 @@ export function WhyChooseUs() {
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 }
 

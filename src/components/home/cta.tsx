@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Terminal } from 'lucide-react';
+import { AnimatedSection } from '../ui/animated-section';
 
 export function CTA() {
   return (
-    <section className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
+    <AnimatedSection className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
       
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -51,10 +52,10 @@ export function CTA() {
             <div className="w-full max-w-md border-t border-white/5 pt-8 mt-4 flex flex-col items-center gap-3">
                 <div className="flex items-center gap-2 text-zinc-600">
                     <Terminal className="w-4 h-4" />
-                    <span className="text-[10px] font-mono uppercase tracking-widest">System Architecture</span>
+                  
                 </div>
                 <p className="text-xs text-zinc-500 font-mono">
-                    // Contribution by <span className="text-zinc-300">Mr. Akshat Rawat</span>
+                    // Thanks to <span className="text-zinc-300">Mr. Akshat Rawat</span> for his Valuable Contribution.
                 </p>
             </div>
 
@@ -62,6 +63,6 @@ export function CTA() {
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

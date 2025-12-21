@@ -1,74 +1,116 @@
-import React from 'react';
-import { Plus, X } from 'lucide-react';
-import { Button } from '../ui/button';
+"use client";
+
+import { Plus, X, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { AnimatedSection } from '@/components/ui/animated-section';
+import { motion } from 'framer-motion';
 
 export function Hero() {
   return (
-    <div className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden flex flex-col justify-center">
+    <AnimatedSection className="relative min-h-screen w-full bg-[#050505] text-white overflow-hidden flex flex-col justify-center font-sans">
       
-      {/* Background Image Setup */}
+ 
       <div className="absolute inset-0 z-0 bg-[#050505]">
-        {/* Solid background on the left to hide potential text in the image */}
+        
+       
         <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505] via-50% to-transparent z-10"></div>
+        
+      
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/20 z-10"></div>
         
-        {/* Strong top gradient to hide navigation buttons */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#050505] via-[#050505]/90 to-transparent z-10"></div>
+       
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050505] via-[#050505]/90 to-transparent z-10"></div>
         
-        {/* Red tint overlay */}
+        {/* Red tint overlay (Unchanged) */}
         <div className="absolute inset-0 bg-red-900/40 mix-blend-overlay z-10 pointer-events-none"></div>
         <div className="absolute inset-0 bg-red-600/20 mix-blend-color z-10 pointer-events-none"></div>
 
+      
         <img 
           src="/back.png" 
-          alt="Hand reaching for light" 
-          className="w-full h-full object-cover object-[80%_top] opacity-70"
+          alt="Atmospheric Background" 
+          className="w-full h-full object-cover object-[70%_top] opacity-80"
         />
       </div>
 
-      {/* Decorative Crosses & Lines */}
-      <div className="absolute top-0 bottom-0 left-11 w-[1px] bg-white/5 z-10 hidden md:block"></div>
+    
+      <div className="absolute top-0 bottom-0 left-6 md:left-11 w-[1px] bg-white/5 z-10 hidden md:block"></div>
       
-      <div className="absolute top-32 left-8 text-zinc-700 z-20">
+      <div className="absolute top-32 left-4 md:left-8 text-zinc-700 z-20">
         <Plus strokeWidth={1} className="w-6 h-6" />
       </div>
-      <div className="absolute bottom-12 left-8 text-zinc-700 z-20">
+      <div className="absolute bottom-12 left-4 md:left-8 text-zinc-700 z-20">
         <Plus strokeWidth={1} className="w-6 h-6" />
       </div>
       <div className="absolute top-32 right-8 flex gap-2 text-zinc-500 z-20">
-        <Plus strokeWidth={1} className="w-5 h-5" />
-        <div className="w-5 h-5 border border-zinc-600 rotate-45 transform"></div>
-        <X strokeWidth={1} className="w-5 h-5" />
+    
       </div>
       
-      {/* Main Content */}
-      <div className="relative z-20 container mx-auto px-8 md:px-16 pt-20">
-        <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight leading-[0.95] mb-12 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70">
-           
-            Grow Your Clinic<br />
-            on Autopilot.
-          </h1>
+
+      <div className="relative z-20 container mx-auto px-8 md:px-16 pt-8">
+        <div className="max-w-4xl">
           
-          <Button className="h-14 px-8 rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/10 backdrop-blur-md transition-all duration-300 text-sm tracking-widest uppercase font-medium">
-            Book a Free Consultation
-          </Button>
+       
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8"
+          >
+            <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
+            <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-300 font-bold">
+              Trusted by Australian Clinics
+            </span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tighter leading-[1] md:leading-[0.95] mb-8 text-white"
+          >
+          
+            Grow Your Clinic<br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
+              on Autopilot.
+            </span>
+          </motion.h1>
+
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="text-xs md:text-lg text-zinc-400 font-light max-w-2xl mb-10 leading-relaxed"
+          >
+             AI-Powered Systems That Attract, Convert, and Retain Patients—<span className="text-white">While You Focus on Care.</span>
+          </motion.p>
+          
+          {/* Buttons */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-col sm:flex-row items-center gap-8"
+          >
+            <Button className="h-12 px-6 w-full sm:w-auto rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/10 backdrop-blur-md transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+              Book a Free Consultation
+            </Button>
+
+            <div className="group flex items-center gap-3 text-xs tracking-widest uppercase text-zinc-500 cursor-pointer hover:text-white transition-colors">
+                Learn More
+                <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
+                   <ArrowRight className="w-3 h-3" />
+                </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
 
-      {/* Bottom Text */}
-      <div className="absolute bottom-12 left-0 right-0 z-20 px-8 md:px-16 flex flex-col md:flex-row justify-between items-end gap-8 text-zinc-400 text-sm leading-relaxed max-w-[1400px] mx-auto w-full">
-        <div className="max-w-md">
-         
-        </div>
-        
-        <div className="flex items-start gap-3 max-w-xs text-right md:text-left">
-          <X strokeWidth={1} className="w-4 h-4 mt-1 shrink-0 text-zinc-600" />
-         
-        </div>
-      </div>
+    
 
-      {/* Grain overlay - simulated with CSS if needed, but keeping clean for now */}
-    </div>
+    </AnimatedSection>
   );
 }
