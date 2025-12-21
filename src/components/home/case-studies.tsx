@@ -1,7 +1,10 @@
+"use client";
 import React from 'react';
+
 import { Button } from '@/components/ui/button';
 import { Plus, Activity, Lock, ArrowRight } from 'lucide-react';
 import { AnimatedSection } from '../ui/animated-section';
+import Link from 'next/link';
 
 export function CaseStudies() {
   return (
@@ -10,7 +13,7 @@ export function CaseStudies() {
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
           {/* Subtle Red Glow behind the card */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-red-900/10 blur-[120px] rounded-full mix-blend-screen"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-red-900/20 blur-[120px] rounded-full mix-blend-screen"></div>
           {/* Faint Grid */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#202020_1px,transparent_1px),linear-gradient(to_bottom,#202020_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
       </div>
@@ -68,9 +71,11 @@ export function CaseStudies() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-6">
+                        <Link href="/contact">
                         <Button className="h-12 px-8 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all font-bold text-xs uppercase tracking-widest">
                             Be Our Next Success Story
                         </Button>
+                        </Link>
                         
                         <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-zinc-600 font-medium font-mono">
                             <Lock className="w-3 h-3" />

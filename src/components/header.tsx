@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +11,7 @@ export function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const pathname = usePathname();
 
-  // Handle Scroll Effect
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -20,7 +20,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menus on route change
+
   useEffect(() => {
     setIsMenuOpen(false);
     setServicesOpen(false);
@@ -37,31 +37,26 @@ export function Header() {
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         
        
-        <div className="flex items-center gap-12">
+        <div className="flex items-center gap-8">
           
          
-          <Link href="/" className="flex items-center gap-4 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <div className="flex items-center gap-1">
-              <div className="flex gap-[3px]">
-                <div className="h-5 w-1.5 bg-white rounded-sm transition-all group-hover:h-6"></div>
-                <div className="h-5 w-1.5 bg-white/70 rounded-sm transition-all group-hover:h-4"></div>
-                {/* Comacks Red Accent */}
-                <div className="h-5 w-1.5 bg-red-600 rounded-sm transition-all group-hover:h-5"></div>
-              </div>
-              <div className="h-6 w-px bg-white/10 mx-2 hidden sm:block"></div>
+              <div className="h-6 w-px mx-2 hidden sm:block"></div>
             </div>
-          <span className="text-sm font-bold tracking-[0.2em] uppercase text-white hidden sm:block">
-  <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks
-</span>
+          
+            <span className="text-sm font-bold tracking-[0.2em] uppercase text-white block">
+              <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks
+            </span>
           </Link>
 
-          {/* Desktop Navigation (Comma Separated) */}
+        
           <nav className="hidden md:flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-zinc-500">
             <NavLink href="/" label="Home" />
             
             <span className="text-zinc-800">,</span>
             
-            {/* Services Dropdown */}
+           
             <div className="relative group">
               <button
                 className="flex items-center gap-1 hover:text-white transition-colors font-bold"
@@ -71,7 +66,6 @@ export function Header() {
                 <ChevronDown className="w-3 h-3" />
               </button>
               
-              {/* Dropdown Menu */}
               <div className="absolute top-full left-0 mt-6 w-48 bg-[#0A0A0A] border border-white/10 rounded-sm p-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                 <div className="flex flex-col">
                   <DropdownLink href="/ai-automation" label="AI Automation" />
@@ -89,56 +83,68 @@ export function Header() {
           </nav>
         </div>
 
-        {/* --- Right Side: Actions --- */}
+       
         <div className="flex items-center gap-6">
-          <button 
-            onClick={() => window.location.href = 'mailto:arpit@comacks.com?subject=Free Consultation Request&body=Hi, I would like to book a free consultation for my clinic.'}
-            className="hidden md:block px-6 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white text-white hover:text-black transition-all duration-300 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm"
-          >
+          <Link href="/contact" className="hidden md:block px-6 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white text-white hover:text-black transition-all duration-300 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm">
             Book Consultation
-          </button>
+          </Link>
 
-          {/* Mobile Menu Toggle */}
+        
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-zinc-400 hover:text-white transition-colors"
+            className="md:hidden text-zinc-400 hover:text-white transition-colors p-2"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* --- Mobile Menu Overlay --- */}
+     
       <div
-        className={`fixed inset-0 top-[80px] bg-[#050505] z-40 md:hidden transition-transform duration-300 flex flex-col p-8 border-t border-white/10 ${
+        className={`fixed inset-0 top-[72px] bg-[#050505] z-40 md:hidden transition-transform duration-300 flex flex-col border-t border-white/10 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col gap-8 text-xl font-medium tracking-tight text-zinc-500">
-          <MobileLink href="/" label="Home" onClick={() => setIsMenuOpen(false)} />
-          <MobileLink href="/ai-automation" label="AI Automation" onClick={() => setIsMenuOpen(false)} />
-          <MobileLink href="/digital-solutions" label="Digital Solutions" onClick={() => setIsMenuOpen(false)} />
-          <MobileLink href="/case-studies" label="Case Studies" onClick={() => setIsMenuOpen(false)} />
-          <MobileLink href="/about" label="About Us" onClick={() => setIsMenuOpen(false)} />
+        <div className="flex flex-col h-full p-8 pb-12">
+          
+         
+          <div className="flex flex-col gap-6 text-sm font-bold tracking-widest uppercase text-zinc-500">
+            <MobileLink href="/" label="Home" onClick={() => setIsMenuOpen(false)} />
+            
+            <div className="flex flex-col gap-4 pl-4 border-l border-white/10 my-2">
+               <span className="text-[10px] text-red-500 font-mono"> // SERVICES</span>
+               <MobileLink href="/ai-automation" label="AI Automation" onClick={() => setIsMenuOpen(false)} />
+               <MobileLink href="/digital-solutions" label="Digital Solutions" onClick={() => setIsMenuOpen(false)} />
+               <MobileLink href="/smm" label="Social Media" onClick={() => setIsMenuOpen(false)} />
+            </div>
 
-          <div className="h-px w-full bg-white/10 my-2"></div>
+            <MobileLink href="/case-studies" label="Case Studies" onClick={() => setIsMenuOpen(false)} />
+            <MobileLink href="/about" label="About Us" onClick={() => setIsMenuOpen(false)} />
+          </div>
 
-          <button
-            onClick={() => {
-              
-              setIsMenuOpen(false);
-            }}
-            className="text-white text-2xl font-semibold flex items-center gap-2"
-          >
-            Book Consultation <span className="text-red-500">&rarr;</span>
-          </button>
+       
+          <div className="mt-auto pt-8 border-t border-white/10">
+            <Link 
+              href="/contact"
+              onClick={() => setIsMenuOpen(false)}
+              className="w-full py-4 rounded-full bg-white text-black font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 active:scale-[0.98] transition-transform duration-200 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+            >
+              Book Consultation
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            
+            <div className="text-center mt-6 text-[10px] text-zinc-600 font-mono uppercase tracking-widest">
+                System Status: Online
+            </div>
+          </div>
+
         </div>
       </div>
     </header>
   );
 }
 
-// --- Sub Components ---
+
 
 function NavLink({ href, label }: { href: string; label: string }) {
   const pathname = usePathname();
@@ -182,7 +188,7 @@ function MobileLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`transition-colors ${isActive ? "text-white" : "hover:text-white"}`}
+      className={`transition-colors text-md ${isActive ? "text-white" : "hover:text-white"}`}
     >
       {label}
     </Link>

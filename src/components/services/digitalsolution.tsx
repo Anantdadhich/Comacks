@@ -14,6 +14,7 @@ import {
   MousePointerClick,
   Smartphone
 } from 'lucide-react';
+import Link from 'next/link';
 
 export function DigitalSolutions() {
   return (
@@ -50,10 +51,15 @@ export function DigitalSolutions() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="h-14 px-8 rounded-full bg-white text-black hover:bg-zinc-200 font-bold uppercase tracking-widest text-xs">
+                 <Link href="/contact"> 
                  Book a Free Consultation
+                 </Link>
               </Button>
+              
               <Button variant="outline" className="h-14 px-8 rounded-full border-white/10 text-zinc-300 hover:text-white hover:bg-white/5 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                 <Link href="/case-studies">
                  View Our Work <ArrowRight className="w-4 h-4" />
+                 </Link>
               </Button>
             </div>
           </div>
@@ -202,7 +208,9 @@ export function DigitalSolutions() {
                </div>
                <div className="mt-12">
                   <Button className="h-14 px-8 rounded-full bg-white text-black hover:bg-zinc-200 font-bold uppercase tracking-widest text-xs">
-                     Book a Free Consultation
+                   <Link href="/contact"> 
+                 Book a Free Consultation
+                 </Link>
                   </Button>
                </div>
             </div>
@@ -255,7 +263,9 @@ export function DigitalSolutions() {
             </p>
             
             <Button className="h-16 px-10 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
-               Book a Free Consultation
+             <Link href="/contact"> 
+                 Book a Free Consultation
+                 </Link>
             </Button>
          </div>
       </section>

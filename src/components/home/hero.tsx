@@ -4,6 +4,7 @@ import { Plus, X, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AnimatedSection } from '@/components/ui/animated-section';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export function Hero() {
   return (
@@ -59,7 +60,7 @@ export function Hero() {
           >
             <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
             <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-300 font-bold">
-              Trusted by Australian Clinics
+              Trusted by Leading Clinics
             </span>
           </motion.div>
 
@@ -84,7 +85,9 @@ export function Hero() {
             transition={{ delay: 0.6 }}
             className="text-xs md:text-lg text-zinc-400 font-light max-w-2xl mb-10 leading-relaxed"
           >
-             AI-Powered Systems That Attract, Convert, and Retain Patients—<span className="text-white">While You Focus on Care.</span>
+             AI-Powered Systems That Attract, Convert, and Retain Patients,
+             <br />
+             <span className="text-white">While You Focus on Care.</span>
           </motion.p>
           
           {/* Buttons */}
@@ -95,11 +98,11 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center gap-8"
           >
             <Button className="h-12 px-6 w-full sm:w-auto rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/10 backdrop-blur-md transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-              Book a Free Consultation
+              <Link href="/contact">Book a Free Consultation</Link>
             </Button>
 
             <div className="group flex items-center gap-3 text-xs tracking-widest uppercase text-zinc-500 cursor-pointer hover:text-white transition-colors">
-                Learn More
+                 <Link href="/about">Learn More</Link>
                 <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
                    <ArrowRight className="w-3 h-3" />
                 </div>

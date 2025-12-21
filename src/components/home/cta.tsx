@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Terminal } from 'lucide-react';
 import { AnimatedSection } from '../ui/animated-section';
+import Link from 'next/link';
 
 export function CTA() {
   return (
@@ -9,7 +10,7 @@ export function CTA() {
       
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-t from-red-900/20 to-transparent blur-[120px] mix-blend-screen"></div>
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-t from-red-900/30 to-transparent blur-[120px] mix-blend-screen"></div>
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -19,7 +20,7 @@ export function CTA() {
           
           {/* Internal Grid & Glow */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]"></div>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-red-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-red-500/20 blur-[100px] rounded-full pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col items-center text-center py-20 px-8 md:px-16 md:py-32">
             
@@ -43,9 +44,11 @@ export function CTA() {
             
             {/* Action Button */}
             <div className="flex flex-col md:flex-row items-center gap-6 w-full justify-center mb-16">
-                <Button className="h-16 px-10 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_50px_-10px_rgba(255,255,255,0.3)]">
-                  Book a Free Consultation
-                </Button>
+                <Link href="/contact">
+                  <Button className="h-16 px-10 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_50px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_80px_-10px_rgba(255,255,255,0.5)]">
+                    Book a Free Consultation
+                  </Button>
+                </Link>
             </div>
 
             {/* Footer Credit - Styled as Terminal Data */}

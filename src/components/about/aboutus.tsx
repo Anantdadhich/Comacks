@@ -16,14 +16,15 @@ import {
   Zap,
   Terminal
 } from 'lucide-react';
+import Link from 'next/link';
 
 export function AboutUs() {
   return (
     <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-red-900/30 overflow-x-hidden pt-24">
       
-      {/* --- Section 1: Hero --- */}
+      
       <section className="relative py-20 px-6 border-b border-white/5 overflow-hidden">
-        {/* Background Elements */}
+       
         <div className="absolute inset-0 z-0 pointer-events-none">
            <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-red-900/10 blur-[100px] rounded-full mix-blend-screen"></div>
            <div className="absolute inset-0 bg-[linear-gradient(to_right,#202020_1px,transparent_1px),linear-gradient(to_bottom,#202020_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
@@ -217,7 +218,9 @@ export function AboutUs() {
             </p>
             
             <Button className="h-14 px-8 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)]">
-               Book a Free Consultation
+              <Link href="/contact"> 
+                 Book a Free Consultation
+                 </Link>
             </Button>
          </div>
       </section>
@@ -226,11 +229,11 @@ export function AboutUs() {
   );
 }
 
-// --- Helper Components ---
+
 
 function ValueCard({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
    return (
-      // Changed bg to be slightly transparent to let the red glow behind show through subtly
+     
       <div className="bg-[#050505]/90 p-10 group hover:bg-[#080808]/80 transition-all duration-300 relative backdrop-blur-sm">
          <div className="absolute top-4 right-4 text-red-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
             <Plus strokeWidth={1} />

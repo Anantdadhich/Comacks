@@ -9,7 +9,7 @@ export function WhyChooseUs() {
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
           {/* Central Red Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-red-900/5 blur-[120px] rounded-full mix-blend-screen"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-red-900/15 blur-[120px] rounded-full mix-blend-screen"></div>
           
           {/* Vertical Lines */}
           <div className="absolute top-0 bottom-0 left-1/3 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent hidden md:block"></div>

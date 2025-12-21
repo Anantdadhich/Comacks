@@ -13,8 +13,8 @@ export function Services() {
       <div className="absolute inset-0 pointer-events-none">
          {/* Grid & Glows */}
          <div className="absolute inset-0 bg-[linear-gradient(to_right,#202020_1px,transparent_1px),linear-gradient(to_bottom,#202020_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
-         <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-red-900/10 blur-[120px] rounded-full mix-blend-screen"></div>
-         <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-red-800/5 blur-[100px] rounded-full mix-blend-screen"></div>
+         <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-red-900/20 blur-[120px] rounded-full mix-blend-screen"></div>
+         <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-red-800/15 blur-[100px] rounded-full mix-blend-screen"></div>
          
          {/* Central Beam (Animated) */}
          <motion.div 
@@ -58,8 +58,8 @@ export function Services() {
             description="24/7 lead capture and patient follow-up systems that work while you sleep." 
             items={['Lead Capture Systems', 'Follow-up Automation', 'CRM Integration', 'WhatsApp Automation']} 
             index={1}
-            // Replace with your local image path e.g., "/images/ai-service.jpg"
-            imageSrc="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=1000"
+           
+            imageSrc="https://images.unsplash.com/photo-1684369175833-4b445ad6bfb5?q=80&w=1996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
           
           <ServiceItem 
@@ -69,8 +69,8 @@ export function Services() {
             items={['Clinic Websites', 'Lead Generation Pages', 'CRM Integrations', 'Lead Management']} 
             align="right" 
             index={2}
-            // Replace with your local image path
-            imageSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
+          
+            imageSrc="https://images.unsplash.com/photo-1726607424623-6d9fee974241?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
           
           <ServiceItem 
@@ -79,8 +79,8 @@ export function Services() {
             description="Strategic paid advertising and social media management for clinics." 
             items={['Paid Ads', 'Social Media Management', 'Content Strategy', 'Local SEO']} 
             index={3}
-            // Replace with your local image path
-            imageSrc="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000"
+           
+            imageSrc="https://images.unsplash.com/photo-1622782914767-404fb9ab3f57?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         
         </div>
@@ -175,7 +175,7 @@ function ServiceItem({ icon, title, description, items, align = 'left', index, i
               <img 
                 src={imageSrc} 
                 alt={title}
-                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                className="w-full h-full object-cover  group-hover:scale-105 transition-all duration-700"
               />
 
               {/* Overlays for atmosphere */}

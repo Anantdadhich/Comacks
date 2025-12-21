@@ -1,6 +1,8 @@
 "use client";
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import { 
   Megaphone, 
   Share2, 
@@ -55,12 +57,12 @@ export function SocialMediaMarketing() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/contact">
               <Button className="h-14 px-8 rounded-full bg-white text-black hover:bg-zinc-200 font-bold uppercase tracking-widest text-xs">
                  Book a Free Consultation
               </Button>
-              <Button variant="outline" className="h-14 px-8 rounded-full border-white/10 text-zinc-300 hover:text-white hover:bg-white/5 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
-                 See Our Results <ArrowRight className="w-4 h-4" />
-              </Button>
+              </Link>
+              
             </div>
           </div>
 
@@ -285,9 +287,11 @@ export function SocialMediaMarketing() {
                Book your free consultation today and discover how our social media marketing can help your clinic attract more high-quality patients.
             </p>
             
+            <Link href="/contact">
             <Button className="h-16 px-10 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
                Book a Free Consultation
             </Button>
+            </Link>
          </div>
       </section>
 

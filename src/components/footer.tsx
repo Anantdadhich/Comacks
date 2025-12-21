@@ -15,22 +15,15 @@ export function Footer() {
       <div className="container mx-auto px-8 py-20 relative z-10">
         
         {/* --- Main Content Row --- */}
-        <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8 mb-20">
+        <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-12 mb-20 max-w-7xl mx-auto px-4">
           
           {/* Brand Column */}
           <div className="max-w-md">
             <Link href="/" className="flex items-center gap-3 mb-6 group">
-                {/* 3-Bar Logo Icon (Matching Header) */}
-                <div className="flex gap-[3px]">
-                    <div className="h-4 w-1 bg-white rounded-sm transition-all group-hover:h-5"></div>
-                    <div className="h-4 w-1 bg-white/70 rounded-sm transition-all group-hover:h-3"></div>
-                    <div className="h-4 w-1 bg-red-600 rounded-sm transition-all group-hover:h-4"></div>
-                </div>
-                {/* Text Logo */}
                 <span className="text-sm font-bold tracking-[0.2em] uppercase">
                   <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks
                 </span>
-            </Link>
+              </Link>
             
             <p className="text-zinc-500 text-sm leading-relaxed mb-8">
               AI-Powered Automation & Digital Solutions designed specifically for the growth of Australian Healthcare Clinics.
@@ -68,7 +61,7 @@ export function Footer() {
               <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Legal</h4>
               <ul className="space-y-4 text-sm text-zinc-500 font-medium">
                 <li><Link href="/privacy" className="hover:text-red-400 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-red-400 transition-colors">Terms of Service</Link></li>
+                <li><Link href="/terms-services" className="hover:text-red-400 transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
 
