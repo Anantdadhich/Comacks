@@ -162,7 +162,7 @@ export function Contact() {
                             </div>
                             <div className="flex items-center justify-between text-xs">
                                 <span className="text-zinc-500">Office Hours</span>
-                                <span className="text-white font-mono">09:00 - 18:00</span>
+                                <span className="text-white font-mono">24/7</span>
                             </div>
                         </div>
                     </div>

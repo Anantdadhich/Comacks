@@ -1,13 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { Zap, Briefcase, Megaphone, Check, Plus } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { AnimatedSection } from '../ui/animated-section';
+import { motion, useInView } from 'framer-motion';
 
 export function Services() {
   return (
-    <AnimatedSection className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
+    <div className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
       
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 pointer-events-none">
@@ -16,19 +15,13 @@ export function Services() {
          <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-red-900/20 blur-[120px] rounded-full mix-blend-screen"></div>
          <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-red-800/15 blur-[100px] rounded-full mix-blend-screen"></div>
          
-         {/* Central Beam (Animated) */}
-         <motion.div 
-           initial={{ height: 0, opacity: 0 }}
-           whileInView={{ height: '100%', opacity: 1 }}
-           viewport={{ once: true }}
-           transition={{ duration: 1.5, ease: "easeInOut" }}
-           className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-red-900/50 to-transparent hidden md:block"
-         ></motion.div>
+         {/* Central Beam (Static) */}
+         <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-red-900/50 to-transparent hidden md:block"></div>
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         
-        {/* --- Section Header (Animated) --- */}
+        {/* --- Section Header --- */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +51,6 @@ export function Services() {
             description="24/7 lead capture and patient follow-up systems that work while you sleep." 
             items={['Lead Capture Systems', 'Follow-up Automation', 'CRM Integration', 'WhatsApp Automation']} 
             index={1}
-           
             imageSrc="https://images.unsplash.com/photo-1684369175833-4b445ad6bfb5?q=80&w=1996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
           
@@ -69,7 +61,6 @@ export function Services() {
             items={['Clinic Websites', 'Lead Generation Pages', 'CRM Integrations', 'Lead Management']} 
             align="right" 
             index={2}
-          
             imageSrc="https://images.unsplash.com/photo-1726607424623-6d9fee974241?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
           
@@ -79,13 +70,12 @@ export function Services() {
             description="Strategic paid advertising and social media management for clinics." 
             items={['Paid Ads', 'Social Media Management', 'Content Strategy', 'Local SEO']} 
             index={3}
-           
             imageSrc="https://images.unsplash.com/photo-1622782914767-404fb9ab3f57?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         
         </div>
       </div>
-    </AnimatedSection>
+    </div>
   );
 }
 
@@ -101,22 +91,20 @@ interface ServiceItemProps {
 
 function ServiceItem({ icon, title, description, items, align = 'left', index, imageSrc }: ServiceItemProps) {
   const isRight = align === 'right';
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+    <div 
+      ref={ref}
       className={`relative flex flex-col md:flex-row items-center gap-12 md:gap-24 ${isRight ? 'md:flex-row-reverse' : ''}`}
     >
       
-      {/* Central Node Dot (Animated Pop) */}
+      {/* Central Node Dot (Animated) */}
       <motion.div 
         initial={{ scale: 0, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
+        animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex flex-col items-center justify-center z-30"
       >
         <div className="w-3 h-3 bg-[#050505] border border-zinc-700 rounded-full flex items-center justify-center">
@@ -126,7 +114,12 @@ function ServiceItem({ icon, title, description, items, align = 'left', index, i
       </motion.div>
 
       {/* Text Content Side */}
-      <div className={`flex-1 ${isRight ? 'md:text-right items-end' : 'md:text-left items-start'} flex flex-col relative z-20`}>
+      <motion.div 
+        initial={{ opacity: 0, x: isRight ? 50 : -50 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isRight ? 50 : -50 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className={`flex-1 ${isRight ? 'md:text-right items-end' : 'md:text-left items-start'} flex flex-col relative z-20`}
+      >
         <div className={`w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center mb-6 backdrop-blur-md ${isRight ? 'md:ml-auto' : ''}`}>
            {icon}
         </div>
@@ -138,10 +131,9 @@ function ServiceItem({ icon, title, description, items, align = 'left', index, i
           {items.map((item, i) => (
             <motion.li 
               key={item} 
-              initial={{ opacity: 0, x: isRight ? 20 : -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 + (i * 0.1), duration: 0.5 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ delay: 0.3 + (i * 0.1), duration: 0.5 }}
               className={`flex items-center gap-3 text-sm text-zinc-300 tracking-wide ${isRight ? 'flex-row-reverse' : ''}`}
             >
               <div className="flex items-center justify-center w-5 h-5 rounded-full bg-red-900/20 border border-red-900/30">
@@ -151,14 +143,13 @@ function ServiceItem({ icon, title, description, items, align = 'left', index, i
             </motion.li>
           ))}
         </ul>
-      </div>
+      </motion.div>
 
-      {/* Visual/Image Side (Animated) */}
+      {/* Visual/Image Side */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2, duration: 0.6 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
         className="flex-1 w-full relative z-10"
       >
         <div className="relative group h-64 md:h-80 w-full">
@@ -175,11 +166,11 @@ function ServiceItem({ icon, title, description, items, align = 'left', index, i
               <img 
                 src={imageSrc} 
                 alt={title}
-                className="w-full h-full object-cover  group-hover:scale-105 transition-all duration-700"
+                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 grayscale hover:grayscale-0"
               />
 
               {/* Overlays for atmosphere */}
-              <div className="absolute inset-0 bg-black/50 mix-blend-multiply pointer-events-none"></div>
+              <div className="absolute inset-0 bg-black/50 mix-blend-multiply pointer-events-none transition-opacity duration-700 group-hover:opacity-30"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent pointer-events-none"></div>
               
               {/* Red tint on hover */}
@@ -188,6 +179,6 @@ function ServiceItem({ icon, title, description, items, align = 'left', index, i
         </div>
       </motion.div>
 
-    </motion.div>
+    </div>
   );
 }

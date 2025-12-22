@@ -177,7 +177,7 @@ export function SocialMediaMarketing() {
             <div className="order-1 lg:order-2">
                <div className="text-red-500 text-xs font-bold tracking-widest uppercase mb-4">// Why Us</div>
                <h2 className="text-3xl md:text-5xl font-medium tracking-tighter mb-8">Why Our Healthcare Marketing Gets Results</h2>
-               <p className="text-zinc-400 mb-12">Our approach is specifically designed for healthcare providers in the Australian market.</p>
+               <p className="text-zinc-400 mb-12">Our approach is specifically designed for healthcare providers in the market.</p>
                
                <div className="space-y-10">
                   <BenefitItem 

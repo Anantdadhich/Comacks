@@ -1,10 +1,9 @@
 import React from 'react';
 import { Quote, Star, Plus, CheckCircle2 } from 'lucide-react';
-import { AnimatedSection } from '../ui/animated-section';
 
 export function Testimonials() {
   return (
-    <AnimatedSection className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
+    <div className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
       
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -45,7 +44,7 @@ export function Testimonials() {
         </div>
 
       </div>
-    </AnimatedSection>
+    </div>
   );
 }
 

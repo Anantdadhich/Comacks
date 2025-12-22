@@ -100,7 +100,7 @@ export function TermsAndConditions() {
                        Services
                     </h2>
                     <p>
-                       Comacks provides AI-powered automation systems, digital solutions, and social media marketing services specifically for healthcare clinics in Australia. Our services include, but are not limited to:
+                       Comacks provides AI-powered automation systems, digital solutions, and social media marketing services specifically for healthcare clinics. Our services include, but are not limited to:
                     </p>
                     <ul className="bg-[#0A0A0A] border border-white/10 rounded-lg p-6 space-y-2 list-none m-0 mt-4">
                        <ListItem>AI automation systems for patient acquisition and retention</ListItem>
@@ -148,7 +148,7 @@ export function TermsAndConditions() {
                        Payments and Fees
                     </h2>
                     <p>
-                       We offer various service packages with different pricing structures. All fees are quoted in Australian Dollars (AUD) and are subject to change with notice. Payment terms will be specified in your service agreement.
+                       We offer various service packages with different pricing structures. All fees are quoted in USD or INR and are subject to change with notice. Payment terms will be specified in your service agreement.
                     </p>
                     <p>
                        If you fail to make any payment when due, we reserve the right to suspend or terminate your services.
@@ -211,7 +211,7 @@ export function TermsAndConditions() {
                             Governing Law
                         </h2>
                         <p>
-                            These Terms shall be governed by and construed in accordance with the laws of Australia, without regard to its conflict of law principles.
+                            These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law principles.
                         </p>
                     </div>
                     <div>

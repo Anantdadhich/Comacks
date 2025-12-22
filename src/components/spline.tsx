@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import createGlobe from "cobe";
 import { cn } from "../lib/utils";
 
-// Utility function to convert a hex color string to a normalized RGB array
+
 const hexToRgbNormalized = (hex: string): [number, number, number] => {
   let r = 0,
     g = 0,
@@ -219,8 +219,8 @@ const Globe: React.FC<GlobeProps> = ({
       <canvas
         ref={canvasRef}
         style={{
-          width: "40rem",
-          height: "40rem",
+          width: "36rem",
+          height: "36rem",
           maxWidth: "auto",
           maxHeight: "auto",
           aspectRatio: "1",

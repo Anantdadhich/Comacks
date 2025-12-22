@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Comacks",
   },
   description:
-    "Scale your healthcare practice on autopilot.",
+    "Scale your healthcare practice on autopilot across the globe.",
   
   icons: {
     icon: "/c.png",

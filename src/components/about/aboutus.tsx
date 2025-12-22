@@ -95,7 +95,7 @@ export function AboutUs() {
                            <h3 className="text-xl font-medium text-white">Identifying the Gap</h3>
                         </div>
                         <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
-                           While working with Australian healthcare providers, we noticed a critical flaw. Many were struggling with outdated marketing approaches, missing opportunities to leverage modern AI for patient acquisition.
+                           While working with healthcare providers, we noticed a critical flaw. Many were struggling with outdated marketing approaches, missing opportunities to leverage modern AI for patient acquisition.
                         </p>
                      </div>
                   </div>
@@ -115,7 +115,7 @@ export function AboutUs() {
                            <h3 className="text-xl font-medium text-white">System Deployed</h3>
                         </div>
                         <p className="text-zinc-400 leading-relaxed text-sm md:text-base border-l-2 border-red-500 pl-4 bg-white/5 p-4 rounded-r-lg">
-                           Today, Comacks is dedicated to bringing cutting-edge digital solutions to healthcare clinics across Australia, helping them attract, convert, and retain patients more effectively than ever before.
+                           Today, Comacks is dedicated to bringing cutting-edge digital solutions to healthcare clinics across the world, helping them attract, convert, and retain patients more effectively than ever before.
                         </p>
                      </div>
                   </div>

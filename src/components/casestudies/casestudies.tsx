@@ -32,7 +32,7 @@ export function CaseStudies() {
           
           <h1 className="text-5xl md:text-7xl font-medium tracking-tighter leading-[0.9] mb-8 text-white">
             Success Stories from <br />
-            <span className="text-zinc-600">Australian Clinics.</span>
+            <span className="text-zinc-600">Healthcare Clinics.</span>
           </h1>
           
           <p className="text-xl text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed">
@@ -59,7 +59,7 @@ export function CaseStudies() {
                  
                  <h2 className="text-2xl md:text-3xl font-medium mb-4">Case Studies Compilation In Progress</h2>
                  <p className="text-zinc-400 max-w-xl mx-auto mb-8">
-                    We're in the process of documenting our success stories with Australian healthcare clinics. Check back soon to see detailed case studies on how we've helped providers grow.
+                    We're in the process of documenting our success stories with healthcare clinics across the globe. Check back soon to see detailed case studies on how we've helped providers grow.
                  </p>
 
                  <div className="flex flex-col sm:flex-row gap-4 justify-center w-full">

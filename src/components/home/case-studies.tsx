@@ -3,12 +3,11 @@ import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Plus, Activity, Lock, ArrowRight } from 'lucide-react';
-import { AnimatedSection } from '../ui/animated-section';
 import Link from 'next/link';
 
 export function CaseStudies() {
   return (
-    <AnimatedSection className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
+    <div className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5">
       
       {/* --- Background Atmospherics --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -30,7 +29,7 @@ export function CaseStudies() {
             Success Stories
           </h2>
           <p className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
-            See how we've helped clinics across Australia grow their patient base and increase revenue.
+            See how we've helped clinics across the world grow their patient base and increase revenue.
           </p>
         </div>
 
@@ -100,6 +99,6 @@ export function CaseStudies() {
         </div>
 
       </div>
-    </AnimatedSection>
+    </div>
   );
 }

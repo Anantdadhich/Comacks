@@ -26,7 +26,7 @@ export function Footer() {
               </Link>
             
             <p className="text-zinc-500 text-sm leading-relaxed mb-8">
-              AI-Powered Automation & Digital Solutions designed specifically for the growth of Australian Healthcare Clinics.
+              AI-Powered Automation & Digital Solutions designed specifically for the growth of Healthcare Clinics.
             </p>
             
             <div className="flex items-center gap-4">
@@ -69,7 +69,7 @@ export function Footer() {
         </div>
 
         {/* --- Bottom Status Bar --- */}
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-zinc-600 font-mono">
+        <div className="border-t border-white/5 pt-8 pl-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[10px] uppercase tracking-widest text-zinc-600 font-mono">
           
           <div className="flex items-center gap-2">
              <p>&copy; {new Date().getFullYear()} Comacks.</p>
@@ -77,20 +77,20 @@ export function Footer() {
              <p className="hidden md:inline">All rights reserved.</p>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 text-[10px]  tracking-widest text-zinc-600 font-mono">
              <div className="flex items-center gap-2">
-                <a href="mailto:arpit@comacks.com" className="hover:text-white transition-colors">
+                <a href="mailto:arpit@comacks.com" className="hover:text-white transition-colors lowercase whitespace-nowrap">
                   arpit@comacks.com
                 </a>
              </div>
              <div className="flex items-center gap-2">
-                <a href="tel:+917303908344" className="hover:text-white transition-colors">
+                <a href="tel:+917303908344" className="hover:text-white transition-colors whitespace-nowrap">
                   +91 7303908344
                 </a>
              </div>
              <div className="flex items-center gap-2">
-                <Radio className="w-3 h-3" />
-                <span>New Delhi, India</span>
+                <Radio className="w-3 h-3 shrink-0" />
+                <span className="whitespace-nowrap">New Delhi, India</span>
              </div>
           </div>
 
