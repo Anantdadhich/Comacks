@@ -1,72 +1,121 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Target, MessageCircle, GitBranch, HeartHandshake, LayoutDashboard } from 'lucide-react';
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Target, MessageCircle, GitBranch, HeartHandshake, LayoutDashboard, Database, Activity } from "lucide-react";
+
+// --- DATA ---
+const MODULES = [
+    {
+        id: "SYS-01",
+        title: "Patient Attraction",
+        desc: "Controlled campaigns (SEO + Ads + Local search). Audience targeting refined to clinic.",
+        icon: <Target className="w-5 h-5" />,
+        status: "Active",
+        tags: ["SEO", "Ad Strategy", "Local Search"],
+        colSpan: "lg:col-span-1",
+    },
+    {
+        id: "SYS-02",
+        title: "Conversion Engine",
+        desc: "AI contact response + booking flows. Website conversion optimization.",
+        icon: <MessageCircle className="w-5 h-5" />,
+        status: "Automated",
+        tags: ["Instant Reply", "Booking Flow", "Qualification"],
+        colSpan: "lg:col-span-1",
+    },
+    {
+        id: "SYS-03",
+        title: "Automation",
+        desc: "Reminder + follow-up automation. CRM + WhatsApp workflows.",
+        icon: <GitBranch className="w-5 h-5" />,
+        status: "Running",
+        tags: ["Reminders", "CRM Workflows", "WhatsApp"],
+        colSpan: "lg:col-span-1",
+    },
+    // --- ROW 2 (Wider Cards for Visual Balance) ---
+    {
+        id: "SYS-04",
+        title: "Retention",
+        desc: "Review & referral generation. Reactivation sequences.",
+        icon: <HeartHandshake className="w-5 h-5" />,
+        status: "Monitoring",
+        tags: ["Reviews", "Referrals", "Reactivation"],
+        colSpan: "lg:col-span-2",
+    },
+    {
+        id: "SYS-05",
+        title: "Visibility",
+        desc: "One dashboard for appointments + revenue + sources.",
+        icon: <LayoutDashboard className="w-5 h-5" />,
+        status: "Live Data",
+        tags: ["Revenue", "Sources", "Appointments"],
+        colSpan: "lg:col-span-1",
+    },
+];
 
 export function OperatingSystem() {
     return (
-        <div id="components" className="bg-[#050505] text-white py-24 border-t border-white/5">
-            <div className="container mx-auto px-6 md:px-12">
+        <section id="components" className="relative bg-[#050505] text-white py-32 border-t border-white/5 overflow-hidden">
 
-                <div className="text-center max-w-3xl mx-auto mb-20">
-                    <div className="inline-flex items-center gap-2 mb-6">
-                        <span className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></span>
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">Infrastructure</span>
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-medium tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40">
-                        Operating System Components
-                    </h2>
-                    <p className="text-zinc-400 font-light leading-relaxed">
-                        We don't sell random services. We deploy a unified infrastructure stack.
-                    </p>
+            {/* --- BACKGROUND LAYER --- */}
+            {/* 1. Technical Grid Overlay */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.1]"
+                style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+            </div>
+
+            {/* 2. Brand Glow (Red) - Subtle ambient light */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-900/5 blur-[120px] rounded-full pointer-events-none" />
+
+            <div className="container mx-auto px-6 md:px-12 relative z-10">
+
+                {/* --- HEADER --- */}
+                <div className="max-w-3xl mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center gap-2 mb-6 border border-red-900/30 bg-red-900/10 px-3 py-1 rounded text-xs font-mono text-red-200/80"
+                    >
+                        <Activity className="w-3 h-3 text-red-500" />
+                        SYSTEM ARCHITECTURE v3.0
+                    </motion.div>
+
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-4xl md:text-6xl font-medium tracking-tighter mb-6 text-white"
+                    >
+                        The Full-Stack<br />
+                        <span className="text-zinc-600">Operating System.</span>
+                    </motion.h2>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-zinc-400 text-lg font-light leading-relaxed max-w-2xl border-l-2 border-red-900/30 pl-6"
+                    >
+                        We don't sell disconnected services. We deploy a unified infrastructure stack designed to mechanically generate patient revenue.
+                    </motion.p>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                    <ComponentCard
-                        icon={<Target className="w-6 h-6" />}
-                        title="Patient Attraction System"
-                        description="Controlled campaigns via SEO, Ads, and Local Search. Audience targeting refined to your clinic's specialty."
-                        tags={['Paid Ads', 'SEO', 'Local Dominance']}
-                    />
-
-                    <ComponentCard
-                        icon={<MessageCircle className="w-6 h-6" />}
-                        title="Conversion Engine"
-                        description="AI-driven response and booking flows. We turn interest into booked appointments instantly."
-                        tags={['AI Booking', 'Instant Response', 'Lead Nurture']}
-                    />
-
-                    <ComponentCard
-                        icon={<GitBranch className="w-6 h-6" />}
-                        title="Automation Core"
-                        description="The backbone of efficiency. Automated reminders, follow-ups, and CRM workflows."
-                        tags={['Reminders', 'No-show Prevention', 'Workflow Logic']}
-                    />
-
-                    <ComponentCard
-                        icon={<HeartHandshake className="w-6 h-6" />}
-                        title="Retention & Reactivation"
-                        description="Keep your patients loyal. Review generation and reactivation sequences for dormant records."
-                        tags={['Review Management', 'Recall Systems', 'Loyalty']}
-                    />
-
-                    <ComponentCard
-                        icon={<LayoutDashboard className="w-6 h-6" />}
-                        title="Visibility Dashboard"
-                        description="One dashboard for all metrics. Know your revenue, sources, and appointment volume in real-time."
-                        tags={['Real-time Data', 'Revenue Tracking', 'Source Attribution']}
-                    />
-
+                {/* --- MODULE GRID (Bento Layout) --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {MODULES.map((module, i) => (
+                        <SystemCard key={module.id} module={module} index={i} />
+                    ))}
                 </div>
 
             </div>
-        </div>
+        </section>
     );
 }
 
-function ComponentCard({ icon, title, description, tags }: { icon: React.ReactNode, title: string, description: string, tags: string[] }) {
+function SystemCard({ module, index }: { module: any, index: number }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -75,24 +124,50 @@ function ComponentCard({ icon, title, description, tags }: { icon: React.ReactNo
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ y: -5 }}
-            className="group p-8 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-all duration-300 flex flex-col"
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className={`group relative flex flex-col justify-between p-8 rounded-2xl bg-[#0A0A0A] border border-white/10 overflow-hidden hover:border-red-500/30 transition-all duration-500 ${module.colSpan}`}
         >
-            <div className="w-12 h-12 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:bg-zinc-800 transition-colors mb-6">
-                {icon}
+            {/* Hover Gradient Effect (Red Tone) */}
+            <div className="absolute inset-0 bg-gradient-to-b from-red-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+            {/* Header: Icon + ID + Status */}
+            <div className="relative z-10 flex items-start justify-between mb-8">
+                <div className="w-10 h-10 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:border-red-500/20 group-hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all duration-300">
+                    {module.icon}
+                </div>
+                <div className="flex flex-col items-end">
+                    <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest mb-1 group-hover:text-red-500/50 transition-colors">
+                        {module.id}
+                    </span>
+                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/5">
+                        <div className="relative w-1.5 h-1.5">
+                            <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75"></div>
+                            <div className="relative w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        </div>
+                        <span className="text-[9px] font-medium text-zinc-400 uppercase tracking-wider">{module.status}</span>
+                    </div>
+                </div>
             </div>
 
-            <h3 className="text-xl font-medium text-white mb-3">{title}</h3>
-            <p className="text-sm text-zinc-400 leading-relaxed font-light mb-8 flex-grow">{description}</p>
+            {/* Content */}
+            <div className="relative z-10 mb-8">
+                <h3 className="text-xl font-medium text-white mb-3 group-hover:text-red-50 transition-colors">
+                    {module.title}
+                </h3>
+                <p className="text-sm text-zinc-400 font-light leading-relaxed">
+                    {module.description}
+                </p>
+            </div>
 
-            <div className="flex flex-wrap gap-2 mt-auto">
-                {tags.map((tag) => (
-                    <span key={tag} className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md bg-white/5 text-zinc-500 border border-white/5">
+            {/* Footer: Tech Tags */}
+            <div className="relative z-10 pt-6 border-t border-white/5 flex flex-wrap gap-2 mt-auto">
+                {module.tags.map((tag: string) => (
+                    <span key={tag} className="text-[10px] font-mono text-zinc-500 bg-zinc-900/50 px-2 py-1 rounded border border-white/5 group-hover:border-red-500/10 group-hover:text-zinc-400 transition-colors">
                         {tag}
                     </span>
                 ))}
             </div>
+
         </motion.div>
     );
 }

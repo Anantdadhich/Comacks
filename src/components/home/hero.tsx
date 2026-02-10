@@ -56,21 +56,23 @@ export function Hero() {
             <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
               Built for Dental Clinics.
             </span>
+            <span className="block text-2xl md:text-4xl text-zinc-500 mt-6 font-normal tracking-tight">
+              Calm. Predictable. Systematic.
+            </span>
           </h1>
 
-          <p className="text-xs md:text-lg text-zinc-400 font-light max-w-2xl mb-10 leading-relaxed pointer-events-auto">
-            Calm. Predictable. Systematic.<br />
+          <p className="text-sm md:text-lg text-zinc-400 font-light max-w-2xl mb-10 leading-relaxed pointer-events-auto">
             <span className="text-white">Not marketing. Not tools. A system that stops revenue leakage.</span>
           </p>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-8 pointer-events-auto">
             <Button className="h-12 px-6 w-full sm:w-auto rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/10 backdrop-blur-md transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)] asChild">
-              <Link href="/contact">Request Clinic Flow Diagnosis</Link>
+              <Link href="/contact">Request a Clinic Flow Diagnosis</Link>
             </Button>
 
             <Link href="#how-it-works" className="group flex items-center gap-3 text-xs tracking-widest uppercase text-zinc-500 cursor-pointer hover:text-white transition-colors">
-              See How The System Works
+              See How the System Works
               <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
                 <ArrowRight className="w-3 h-3" />
               </div>

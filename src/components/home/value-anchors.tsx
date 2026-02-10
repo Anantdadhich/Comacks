@@ -1,72 +1,172 @@
 "use client";
 
-import React from 'react';
-import { AlertTriangle, Clock, MessageSquare, UserX, Activity } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { AlertTriangle, Clock, MessageSquare, UserX, Activity, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+// --- DATA: Separated for clean maintenance ---
+const DIAGNOSIS_ITEMS = [
+    {
+        id: 1,
+        icon: <Clock className="w-5 h-5" />,
+        title: "Enquiries slipping after hours",
+        description: "50% of patient interest happens when your reception is closed. Without automation, these leads are lost forever.",
+        highlight: "Severe Revenue Risk",
+        colSpan: "lg:col-span-2",
+    },
+    {
+        id: 2,
+        icon: <MessageSquare className="w-5 h-5" />,
+        title: "WhatsApp chaos",
+        description: "Patient chats scattered across personal phones mean zero accountability and lost booking history.",
+        highlight: "Operational Risk",
+        colSpan: "lg:col-span-2",
+    },
+    {
+        id: 3,
+        icon: <UserX className="w-5 h-5" />,
+        title: "No-shows without structured follow-up",
+        description: "Manual follow-ups are inconsistent. Patients forget, the chair stays empty, and revenue vanishes.",
+        highlight: "Efficiency Drain",
+        colSpan: "lg:col-span-2",
+    },
+    {
+        id: 4,
+        icon: <Activity className="w-5 h-5" />,
+        title: "Lost walk-in patients",
+        description: "Walk-ins who don't book immediately often leave without data capture. We turn 'just asking' into a nurtured lead.",
+        highlight: "Missed Opportunity",
+        colSpan: "lg:col-span-3", // Wide card on bottom row
+    },
+    {
+        id: 5,
+        icon: <AlertTriangle className="w-5 h-5" />,
+        title: "Old patients not returning",
+        description: "Thousands of past records sit gathering dust. We reactivate them automatically without lifting a finger.",
+        highlight: "Hidden Goldmine",
+        colSpan: "lg:col-span-3", // Wide card on bottom row
+    },
+];
+
+// --- ANIMATION VARIANTS ---
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1 }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: "easeOut" }
+    }
+};
 
 export function ValueAnchors() {
     return (
-        <div className="relative bg-[#050505] text-white py-24 border-t border-white/5">
+        <section className="relative bg-[#050505] text-white py-24 md:py-32 overflow-hidden">
+
+            {/* Background Texture (Noise) - Matches Hero */}
+            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+
+            {/* Decorative Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-900/10 blur-[120px] rounded-full pointer-events-none" />
+
             <div className="container mx-auto px-6 md:px-12 relative z-10">
 
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <div className="inline-flex items-center gap-2 mb-6">
-                        <span className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></span>
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">System Diagnosis</span>
-                    </div>
+                {/* --- HEADER SECTION --- */}
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-white/5 bg-white/5 backdrop-blur-sm"
+                    >
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold">System Diagnosis</span>
+                    </motion.div>
 
-                    <h2 className="text-3xl md:text-5xl font-medium tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40">
-                        Invisible Clinic Problems We Diagnose
-                    </h2>
-                    <p className="text-zinc-400 font-light leading-relaxed">
-                        Revenue leakage often happens where you can't see it. Our system identifies and fixes these operational gaps.
-                    </p>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-3xl md:text-5xl font-medium tracking-tighter mb-6 text-white"
+                    >
+                        Invisible Leaks in Your<br />
+                        <span className="text-zinc-500">Clinic Operations.</span>
+                    </motion.h2>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-zinc-400 font-light leading-relaxed text-balance"
+                    >
+                        Revenue leakage rarely happens all at once. It happens in the gaps between tools,
+                        missed calls, and forgotten follow-ups.
+                    </motion.p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-6">
-                    <ProblemCard
-                        icon={<Clock className="w-5 h-5" />}
-                        title="Enquiries Slipping After Hours"
-                        description="50% of patient interest happens when your reception is closed. Without a system, these leads are lost forever."
-                    />
-                    <ProblemCard
-                        icon={<MessageSquare className="w-5 h-5" />}
-                        title="WhatsApp Chaos"
-                        description="Patient messages scattered across personal phones and unmonitored chats lead to missed bookings and zero accountability."
-                    />
-                    <ProblemCard
-                        icon={<UserX className="w-5 h-5" />}
-                        title="No-Shows Without Follow-up"
-                        description="Manual follow-ups are inconsistent. Patients forget appointments, and revenue disappears without a trace."
-                    />
-                    <ProblemCard
-                        icon={<Activity className="w-5 h-5" />}
-                        title="Lost Walk-in Patients"
-                        description="Walk-ins that don't book immediately often leave without their data being captured for future nurturing."
-                    />
-                    <ProblemCard
-                        icon={<AlertTriangle className="w-5 h-5" />}
-                        title="Old Patients Not Returning"
-                        description="Thousands of past patient records sit dormant because there is no automated reactivation system in place."
-                    />
-                </div>
+                {/* --- BENTO GRID LAYOUT --- */}
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6"
+                >
+                    {DIAGNOSIS_ITEMS.map((item) => (
+                        <ProblemCard key={item.id} item={item} />
+                    ))}
+                </motion.div>
 
             </div>
-        </div>
+        </section>
     );
 }
 
-function ProblemCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
+function ProblemCard({ item }: { item: typeof DIAGNOSIS_ITEMS[0] }) {
     return (
         <motion.div
-            whileHover={{ y: -5 }}
-            className="p-8 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+
+            className={`group relative flex flex-col justify-between p-8 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-colors duration-500 ${item.colSpan}`}
         >
-            <div className="w-10 h-10 rounded-full bg-red-900/10 border border-red-900/20 flex items-center justify-center text-red-500 mb-6">
-                {icon}
+            {/* Hover Gradient Border Effect */}
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-transparent group-hover:ring-white/10 transition-all duration-500" />
+
+            <div>
+                <div className="flex items-start justify-between mb-6">
+                    <div className="w-10 h-10 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:border-white/20 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                        {item.icon}
+                    </div>
+                    <span className="text-[10px] font-bold tracking-wider uppercase text-red-500/80 bg-red-500/10 px-2 py-1 rounded border border-red-500/10">
+                        {item.highlight}
+                    </span>
+                </div>
+
+                <h3 className="text-xl font-medium text-white mb-3 group-hover:text-red-100 transition-colors">
+                    {item.title}
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed font-light group-hover:text-zinc-300 transition-colors">
+                    {item.description}
+                </p>
             </div>
-            <h3 className="text-lg font-medium text-white mb-3">{title}</h3>
-            <p className="text-sm text-zinc-400 leading-relaxed font-light">{description}</p>
+
+            {/* Decorative 'Fix' Arrow that appears on hover */}
+            <div className="mt-8 flex items-center gap-2 text-xs font-medium text-white/0 group-hover:text-red-400 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <span>System Fix Available</span>
+                <ArrowRight className="w-3 h-3" />
+            </div>
+
         </motion.div>
     );
 }

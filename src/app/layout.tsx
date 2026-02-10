@@ -28,8 +28,8 @@ export const viewport: Viewport = {
 
 
 export const metadata: Metadata = {
- 
-  metadataBase: new URL("https://www.comacks.com"), 
+
+  metadataBase: new URL("https://www.comacks.com"),
 
   title: {
     default: "Comacks | AI Automation & Growth Infrastructure for Clinics",
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
   },
   description:
     "Scale your healthcare practice on autopilot across the globe.",
-  
+
   icons: {
-    icon: "/c.png",
-    shortcut: "/c.png",
-    apple: "/c.png",
+    icon: "/headercom.png",
+    shortcut: "/headercom.png",
+    apple: "/headercom.png",
   },
-  
+
   keywords: [
     "Healthcare Marketing",
     "AI Automation for Clinics",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Comacks Team" }],
   creator: "Comacks",
   publisher: "Comacks",
-  
+
 
   robots: {
     index: true,
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     siteName: "Comacks",
     images: [
       {
-        url: "/comlogo.jpg", 
+        url: "/comlogo.jpg",
         width: 1200,
         height: 630,
         alt: "Comacks - AI Growth for Clinics",
@@ -89,18 +89,18 @@ export const metadata: Metadata = {
     ],
   },
 
-  
+
   twitter: {
     card: "summary_large_image",
     title: "Comacks | AI Automation for Clinics",
     description: "Scale your healthcare practice on autopilot with AI-powered systems.",
-    images: ["/comlogo.jpg"], 
-    creator: "@Comacksgrowth", 
+    images: ["/comlogo.jpg"],
+    creator: "@Comacksgrowth",
   },
 
-  
-  
-  
+
+
+
 };
 
 export default function RootLayout({
@@ -111,7 +111,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-[#050505] text-white font-sans`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-[#050505] text-white font-sans selection:bg-red-500/30 selection:text-red-100`}
       >
         <div className="flex flex-col min-h-screen">
           <Header />

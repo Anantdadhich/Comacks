@@ -42,6 +42,16 @@ export function Footer() {
 
 
             <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">System</h4>
+              <ul className="space-y-4 text-sm text-zinc-500 font-medium">
+                <li><Link href="/" className="hover:text-red-400 transition-colors">Home</Link></li>
+                <li><Link href="/#how-it-works" className="hover:text-red-400 transition-colors">How It Works</Link></li>
+                <li><Link href="/#components" className="hover:text-red-400 transition-colors">Components</Link></li>
+                <li><Link href="/contact" className="hover:text-red-400 transition-colors">Request Diagnosis</Link></li>
+              </ul>
+            </div>
+
+            <div>
               <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Company</h4>
               <ul className="space-y-4 text-sm text-zinc-500 font-medium">
                 <li><Link href="/about" className="hover:text-red-400 transition-colors">About</Link></li>

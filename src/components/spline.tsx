@@ -73,7 +73,7 @@ const Globe: React.FC<GlobeProps> = ({
     const resolvedBaseColor: [number, number, number] =
       typeof baseColor === "string"
         ? hexToRgbNormalized(baseColor)
-        : baseColor || hexToRgbNormalized("#c90000"); 
+        : baseColor || hexToRgbNormalized("#c90000");
 
     const resolvedMarkerColor: [number, number, number] =
       typeof markerColor === "string"

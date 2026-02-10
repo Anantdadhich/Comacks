@@ -37,8 +37,8 @@ export function SystemPhilosophy() {
                                 description="A system connects patient acquisition directly to retention. It's a holistic engine that protects revenue."
                             />
                             <PhilosophyPoint
-                                title="Predictability vs Hope"
-                                description="Marketing implies testing and hoping. A system implies engineering and predictability."
+                                title="Protection vs Hope"
+                                description="Systems protect revenue, services alone don't."
                             />
                         </div>
                     </div>

@@ -44,7 +44,7 @@ export function AboutUs() {
                </h1>
 
                <p className="text-lg md:text-xl text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed">
-                  Comacks exists to make patient flow predictable for clinics — because clinic owners should treat patients, not chase leads, apps, and staff follow-ups.
+                  <span className="font-bold text-white"><span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks</span> exists to make patient flow predictable for clinics — because clinic owners should treat patients, not chase leads, apps, and staff follow-ups.
                </p>
             </div>
          </section>
@@ -115,7 +115,7 @@ export function AboutUs() {
                               <h3 className="text-xl font-medium text-white">Predictable Growth</h3>
                            </div>
                            <p className="text-zinc-400 leading-relaxed text-sm md:text-base border-l-2 border-red-500 pl-4 bg-white/5 p-4 rounded-r-lg">
-                              Today, we don't just "run ads." We install the Comacks Operating System into clinics, giving owners total control over their patient flow, revenue, and time.
+                              Today, we don't just "run ads." We install the <span className="font-bold text-white"><span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks</span> Operating System into clinics, giving owners total control over their patient flow, revenue, and time.
                            </p>
                         </div>
                      </div>
@@ -212,14 +212,14 @@ export function AboutUs() {
          {/* --- Section 5: CTA --- */}
          <section className="relative py-24 px-6 md:px-12 bg-gradient-to-b from-[#050505] to-[#0A0A0A] border-t border-white/5">
             <div className="container mx-auto max-w-4xl text-center">
-               <h2 className="text-4xl md:text-5xl font-medium tracking-tighter mb-8">Ready to Partner with Comacks?</h2>
+               <h2 className="text-4xl md:text-5xl font-medium tracking-tighter mb-8">Ready to Partner with <span className="font-bold text-white"><span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks</span>?</h2>
                <p className="text-xl text-zinc-400 font-light mb-12 max-w-2xl mx-auto">
                   Book your free consultation today and discover how our values-driven approach can help your clinic grow on autopilot.
                </p>
 
                <Button className="h-14 px-8 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)]">
                   <Link href="/contact">
-                     Book a Free Consultation
+                     Request Diagnosis
                   </Link>
                </Button>
             </div>

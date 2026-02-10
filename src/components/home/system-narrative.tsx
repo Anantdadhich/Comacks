@@ -1,114 +1,175 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Magnet, Zap, Workflow, RefreshCw, Eye } from 'lucide-react';
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Magnet, Zap, Workflow, RefreshCw, BarChart3, CheckCircle2 } from "lucide-react";
+
+// --- DATA ---
+const STEPS = [
+    {
+        id: "01",
+        title: "Controlled Patient Attraction",
+        desc: "We attract the right patients only when your system is ready — so leads don’t just arrive and leak.",
+        icon: <Magnet className="w-5 h-5" />,
+    },
+    {
+        id: "02",
+        title: "Instant Response & Booking",
+        desc: "Every enquiry gets an instant response — no waiting, no lost patients. This directly connects to revenue health.",
+        icon: <Zap className="w-5 h-5" />,
+    },
+    {
+        id: "03",
+        title: "Automation & Follow-Up",
+        desc: "Automated reminders, follow-ups, and review requests mean no-shows stop costing money.",
+        icon: <Workflow className="w-5 h-5" />,
+    },
+    {
+        id: "04",
+        title: "Retention & Reactivation",
+        desc: "Old patients don’t disappear — the system brings them back automatically.",
+        icon: <RefreshCw className="w-5 h-5" />,
+    },
+    {
+        id: "05",
+        title: "Visibility & Control",
+        desc: "A single view of truth — know appointments, sources, revenue, and patient behavior in one place.",
+        icon: <BarChart3 className="w-5 h-5" />,
+    },
+];
 
 export function SystemNarrative() {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // Track scroll progress relative to this specific section
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start center", "end center"],
+    });
+
+    // Smooth out the scroll progress for the filling line
+    const scaleY = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+
     return (
-        <div id="how-it-works" className="relative bg-[#050505] text-white py-24 md:py-32 border-t border-white/5 overflow-hidden">
+        <section
+            ref={containerRef}
+            id="how-it-works"
+            className="relative bg-[#050505] text-white py-32 overflow-hidden"
+        >
+
+            {/* Background Decorators */}
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
             <div className="container mx-auto px-6 md:px-12 relative z-10">
 
-                <div className="text-center max-w-3xl mx-auto mb-20">
-                    <div className="inline-flex items-center gap-2 mb-6">
-                        <span className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></span>
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">System Narrative</span>
+                {/* --- HEADER --- */}
+                <div className="text-center max-w-3xl mx-auto mb-24">
+                    <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-white/5 bg-white/5 backdrop-blur-sm">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
+                            Workflow Architecture
+                        </span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-medium tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40">
-                        How The System Works
+
+                    <h2 className="text-4xl md:text-5xl font-medium tracking-tighter mb-6 text-white">
+                        From Chaos to <span className="text-zinc-500">Clockwork.</span>
                     </h2>
-                    <p className="text-zinc-400 font-light leading-relaxed">
-                        We don't just "do marketing". We install a controlled patient flow infrastructure.
+                    <p className="text-zinc-400 font-light leading-relaxed max-w-xl mx-auto text-balance">
+                        We don't just "do marketing". We install a controlled patient flow infrastructure that operates 24/7.
                     </p>
                 </div>
 
-                <div className="relative space-y-24">
+                {/* --- TIMELINE CONTAINER --- */}
+                <div className="relative max-w-5xl mx-auto">
 
-                    {/* Vertical Connection Line */}
-                    <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent hidden md:block"></div>
+                    {/* THE SPINE (Vertical Line) */}
+                    <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/5 -translate-x-1/2">
+                        {/* The Active Filling Line (Red) */}
+                        <motion.div
+                            style={{ scaleY, transformOrigin: "top" }}
+                            className="absolute top-0 left-0 w-full bg-gradient-to-b from-red-500 via-red-900 to-transparent h-full"
+                        />
+                    </div>
 
-                    <NarrativeStep
-                        icon={<Magnet className="w-5 h-5" />}
-                        step="01"
-                        title="Controlled Patient Attraction"
-                        description="We attract the right patients only when your system is ready. No wasted leads. No overflow. Targeted acquisition ensures steady, manageable growth."
-                        align="left"
-                    />
-
-                    <NarrativeStep
-                        icon={<Zap className="w-5 h-5" />}
-                        step="02"
-                        title="Instant Response & Booking"
-                        description="Every enquiry gets an instant response. Speed to lead is critical. Our system engages potential patients immediately, separating serious bookings from casual queries."
-                        align="right"
-                    />
-
-                    <NarrativeStep
-                        icon={<Workflow className="w-5 h-5" />}
-                        step="03"
-                        title="Automation & Follow-Up"
-                        description="Manual follow-ups are replaced by intelligent automation. Reminders, confirmations, and nurture sequences run in the background, ensuring no patient falls through the cracks."
-                        align="left"
-                    />
-
-                    <NarrativeStep
-                        icon={<RefreshCw className="w-5 h-5" />}
-                        step="04"
-                        title="Retention & Reactivation"
-                        description="Old patients don't disappear. The system automatically maintains contact, prompting regular check-ups and reactivating dormant patients to keep your schedule full."
-                        align="right"
-                    />
-
-                    <NarrativeStep
-                        icon={<Eye className="w-5 h-5" />}
-                        step="05"
-                        title="Visibility & Control"
-                        description="Stop guessing. A single dashboard gives you a view of truth—appointments, revenue, and sources. Data flows into decisions, not vanity metrics."
-                        align="left"
-                    />
+                    <div className="space-y-24 relative">
+                        {STEPS.map((step, index) => (
+                            <TimelineItem
+                                key={step.id}
+                                item={step}
+                                index={index}
+                                isLast={index === STEPS.length - 1}
+                            />
+                        ))}
+                    </div>
 
                 </div>
-
             </div>
-        </div>
+        </section>
     );
 }
 
-function NarrativeStep({ icon, step, title, description, align }: { icon: React.ReactNode, step: string, title: string, description: string, align: 'left' | 'right' }) {
-    const isRight = align === 'right';
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+function TimelineItem({ item, index, isLast }: { item: typeof STEPS[0], index: number, isLast: boolean }) {
+    const isEven = index % 2 === 0;
 
     return (
-        <div ref={ref} className={`relative flex flex-col md:flex-row items-center gap-12 ${isRight ? 'md:flex-row-reverse' : ''}`}>
+        <div className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0 ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}>
 
-            {/* Center Marker */}
-            <div className="absolute left-0 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-[#050505] border border-white/20">
-                <div className={`w-2 h-2 rounded-full ${isInView ? 'bg-red-500' : 'bg-zinc-700'} transition-colors duration-500`}></div>
+            {/* --- CENTER NODE (The Dot) --- */}
+            <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#050505] border border-white/20 z-20 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,1)]">
+                <div className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
             </div>
 
+            {/* --- CONNECTOR LINE (Horizontal) --- */}
+            {/* Desktop Connector */}
+            <div className={`hidden md:block absolute top-1/2 w-[calc(50%-2rem)] h-px bg-gradient-to-r from-white/10 to-transparent ${isEven ? "right-1/2 origin-right" : "left-1/2 origin-left"}`} />
+
+            {/* Mobile Connector */}
+            <div className="md:hidden absolute left-8 top-8 bottom-[-4rem] w-px border-l border-dashed border-white/10 ml-[1px]" />
+
+
+            {/* --- CONTENT CARD --- */}
+            {/* Note: pl-20 on mobile pushes content right of the timeline */}
             <motion.div
-                initial={{ opacity: 0, x: isRight ? 30 : -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isRight ? 30 : -30 }}
-                transition={{ duration: 0.6 }}
-                className={`flex-1 ${isRight ? 'md:text-left' : 'md:text-right'}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`relative w-full md:w-[45%] pl-20 md:pl-0 ${isEven ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"}`}
             >
-                <div className={`flex flex-col ${isRight ? 'md:items-start' : 'md:items-end'}`}>
-                    <div className="flex items-center gap-3 mb-4">
-                        <span className="text-xs font-mono text-zinc-500 tracking-widest">STEP {step}</span>
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-white">
-                            {icon}
-                        </div>
+
+                {/* Step Number & Icon Header */}
+                <div className={`flex items-center gap-4 mb-4 ${isEven ? "md:flex-row-reverse" : "md:flex-row"}`}>
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-white shadow-inner">
+                        {item.icon}
                     </div>
-                    <h3 className="text-2xl font-medium text-white mb-4">{title}</h3>
-                    <p className="text-zinc-400 leading-relaxed font-light max-w-md">{description}</p>
+                    <span className="text-4xl font-mono font-bold text-white/5 tracking-tighter select-none">
+                        {item.id}
+                    </span>
                 </div>
+
+                {/* Text Content */}
+                <h3 className="text-xl md:text-2xl font-medium text-white mb-3">
+                    {item.title}
+                </h3>
+                <p className="text-zinc-400 font-light leading-relaxed text-sm md:text-base">
+                    {item.desc}
+                </p>
+
+                {/* Decorative corner bracket to make it look 'technical' */}
+                <div className={`absolute top-0 w-8 h-8 border-t border-white/10 ${isEven ? "md:right-0 md:border-r rounded-tr-xl" : "md:left-0 md:border-l rounded-tl-xl"} hidden md:block`} />
+
             </motion.div>
 
-            <div className="flex-1 md:block hidden">
-                {/* Spacer for the other side */}
-            </div>
+            {/* Spacer for symmetry */}
+            <div className="w-full md:w-[45%]" />
 
         </div>
     );
