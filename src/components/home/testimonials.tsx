@@ -36,7 +36,7 @@ export function Testimonials() {
             delay="0"
           />
           <TestimonialCard
-            quote="Our website conversion rate has tripled since working with Comacks. Their understanding of the healthcare space is unmatched."
+            quote={<>Our website conversion rate has tripled since working with comacks. Their understanding of the healthcare space is unmatched.</>}
             delay="100"
           />
           <TestimonialCard
@@ -50,7 +50,7 @@ export function Testimonials() {
   );
 }
 
-function TestimonialCard({ quote, delay }: { quote: string, delay: string }) {
+function TestimonialCard({ quote, delay }: { quote: React.ReactNode, delay: string }) {
   return (
     <div
       style={{ transitionDelay: `${delay}ms` }}

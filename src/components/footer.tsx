@@ -5,7 +5,7 @@ import { ArrowUpRight, Plus, Radio } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#050505] text-white border-t border-white/5 overflow-hidden">
+    <footer className="print:hidden relative bg-[#050505] text-white border-t border-white/5 overflow-hidden">
 
       {/* --- Background Texture --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -45,9 +45,10 @@ export function Footer() {
               <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">System</h4>
               <ul className="space-y-4 text-sm text-zinc-500 font-medium">
                 <li><Link href="/" className="hover:text-red-400 transition-colors">Home</Link></li>
-                <li><Link href="/#how-it-works" className="hover:text-red-400 transition-colors">How It Works</Link></li>
-                <li><Link href="/#components" className="hover:text-red-400 transition-colors">Components</Link></li>
-                <li><Link href="/contact" className="hover:text-red-400 transition-colors">Request Diagnosis</Link></li>
+
+                <li><Link href="/diagnosis" className="hover:text-red-400 transition-colors">Request Diagnosis</Link></li>
+                <li><Link href="/research" className="hover:text-red-400 transition-colors">Research</Link></li>
+                <li><Link href="/case-studies" className="hover:text-red-400 transition-colors">Case Studies</Link></li>
               </ul>
             </div>
 

@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  name        String
+  phone       String?
+  email       String?
+  clinic_name String
+  city        String
+  country     String
+  created_at  DateTime @default(now())
+
+  inputs    DiagnosisInput[]
+  reports   Report[]
+  meetings  Meeting[]
+  shareLogs ShareLog[]
+}
+
+model DiagnosisInput {
+  id                    String   @id @default(uuid())
+  user_id               String?
+  country               String
+  monthly_inquiries     Int
+  monthly_consultations Int
+  treatments_started    Int
+  treatments_completed  Int
+  average_case_value    Float
+  patients_last_year    Int
+  patients_returned     Int
+  created_at            DateTime @default(now())
+
+  user   User?            @relation(fields: [user_id], references: [id])
+  result DiagnosisResult?
+}
+
+model DiagnosisResult {
+  id              String @id @default(uuid())
+  input_id        String @unique
+  consult_rate    Float
+  treatment_rate  Float
+  completion_rate Float
+  recall_rate     Float
+  score           Float
+
+  lead_leak       Int
+  conversion_leak Int
+  completion_leak Int
+  recall_leak     Int
+  lost_patients   Int
+
+  monthly_loss Float
+  annual_loss  Float
+
+  current_revenue   Float
+  potential_revenue Float
+  recovery          Float
+
+  created_at DateTime @default(now())
+
+  input   DiagnosisInput @relation(fields: [input_id], references: [id])
+  reports Report[]
+}
+
+model Benchmark {
+  id                 String   @id @default(uuid())
+  country            String   @unique
+  currency           String
+  case_value_default Float
+  inquiries_avg      Int
+  consult_target     Float
+  treatment_target   Float
+  completion_target  Float
+  recall_target      Float
+  created_at         DateTime @default(now())
+}
+
+model Report {
+  id         String   @id @default(uuid())
+  user_id    String
+  result_id  String
+  file_path  String
+  created_at DateTime @default(now())
+
+  user   User            @relation(fields: [user_id], references: [id])
+  result DiagnosisResult @relation(fields: [result_id], references: [id])
+}
+
+model Meeting {
+  id           String    @id @default(uuid())
+  user_id      String
+  meeting_time DateTime?
+  source       String
+  notes        String?
+  created_at   DateTime  @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+}
+
+model AdminUser {
+  id            String   @id @default(uuid())
+  username      String   @unique
+  password_hash String
+  role          String
+  created_at    DateTime @default(now())
+}
+
+model ShareLog {
+  id         String   @id @default(uuid())
+  user_id    String
+  method     String
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+}

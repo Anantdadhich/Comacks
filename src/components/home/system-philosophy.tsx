@@ -59,7 +59,7 @@ export function SystemPhilosophy() {
                                 <X className="w-8 h-8 text-red-900/50 mx-auto" />
                             </div>
                             <div className="text-center">
-                                <h4 className="text-sm font-bold uppercase tracking-widest text-white mb-2">Comacks System</h4>
+                                <h4 className="text-sm font-bold uppercase tracking-widest text-white mb-2"><span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks System</h4>
                                 <Check className="w-8 h-8 text-green-500 mx-auto" />
                             </div>
                         </div>

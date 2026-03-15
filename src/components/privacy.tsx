@@ -69,7 +69,7 @@ export function PrivacyPolicy() {
                     <div className="p-6 rounded-xl border border-white/5 bg-white/5">
                        <Lock className="w-6 h-6 text-zinc-400 mb-4" />
                        <p className="text-xs text-zinc-500 leading-relaxed">
-                          This document outlines the security protocols and data handling procedures for the Comacks system.
+                          This document outlines the security protocols and data handling procedures for the <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks system.
                        </p>
                     </div>
                  </div>
@@ -85,7 +85,7 @@ export function PrivacyPolicy() {
                        Introduction
                     </h2>
                     <p>
-                       Welcome to Comacks. We respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                       Welcome to <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks. We respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
                     </p>
                     <p>
                        Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access the site or use our services.

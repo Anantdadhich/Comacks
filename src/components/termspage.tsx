@@ -86,7 +86,7 @@ export function TermsAndConditions() {
                        Agreement to Terms
                     </h2>
                     <p>
-                       These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and Comacks ("we," "us" or "our"), concerning your access to and use of our website and services.
+                       These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks ("we," "us" or "our"), concerning your access to and use of our website and services.
                     </p>
                     <p>
                        By accessing or using our services, you agree to be bound by these Terms. If you disagree with any part of these Terms, then you may not access our services.
@@ -100,7 +100,7 @@ export function TermsAndConditions() {
                        Services
                     </h2>
                     <p>
-                       Comacks provides AI-powered automation systems, digital solutions, and social media marketing services specifically for healthcare clinics. Our services include, but are not limited to:
+                       <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks provides AI-powered automation systems, digital solutions, and social media marketing services specifically for healthcare clinics. Our services include, but are not limited to:
                     </p>
                     <ul className="bg-[#0A0A0A] border border-white/10 rounded-lg p-6 space-y-2 list-none m-0 mt-4">
                        <ListItem>AI automation systems for patient acquisition and retention</ListItem>
@@ -118,7 +118,7 @@ export function TermsAndConditions() {
                        Intellectual Property
                     </h2>
                     <p>
-                       Unless otherwise indicated, the website and all content, features, and functionality are owned by Comacks, its licensors, or other providers of such material and are protected by copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
+                       Unless otherwise indicated, the website and all content, features, and functionality are owned by <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks, its licensors, or other providers of such material and are protected by copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
                     </p>
                     <p>
                        You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of our materials without our express written consent.
@@ -181,7 +181,7 @@ export function TermsAndConditions() {
                        Limitation of Liability
                     </h2>
                     <p>
-                       To the maximum extent permitted by law, Comacks and its affiliates, officers, employees, agents, partners, and licensors shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation:
+                       To the maximum extent permitted by law, <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks and its affiliates, officers, employees, agents, partners, and licensors shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation:
                     </p>
                     <div className="grid grid-cols-2 gap-4 mt-6 mb-6">
                         <AlertBox text="Loss of profits" />

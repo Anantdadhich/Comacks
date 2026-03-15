@@ -44,7 +44,7 @@ export function CTA() {
 
             {/* Action Button */}
             <div className="flex flex-col md:flex-row items-center gap-6 w-full justify-center mb-16">
-              <Link href="/contact">
+              <Link href="/diagnosis">
                 <Button className="h-16 px-10 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_50px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_80px_-10px_rgba(255,255,255,0.5)]">
                   Request Clinic Flow Diagnosis
                 </Button>
