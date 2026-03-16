@@ -34,11 +34,11 @@ export function DiagnosisToolPreview() {
             </div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tighter text-white mb-6 leading-[1.1]">
-              Run a Full System <span className="text-zinc-600">Diagnosis.</span>
+              Run a Practice Growth <span className="text-zinc-600">Audit.</span>
             </h2>
 
             <p className="text-lg text-zinc-400 font-light leading-relaxed mb-10">
-              Input your monthly clinic metrics and our engine will automatically trace, locate, and calculate your patient leaks—generating a precise revenue recovery roadmap in seconds.
+              Input your monthly clinic metrics and our system will automatically identify and map your clinic growth gaps—generating a precise revenue recovery roadmap in seconds.
             </p>
 
             {/* Diagnostic Capabilities */}
@@ -46,7 +46,7 @@ export function DiagnosisToolPreview() {
               {[
                 { icon: <Activity className="w-4 h-4" />, text: "Pinpoint exact pipeline bottlenecks" },
                 { icon: <BarChart2 className="w-4 h-4" />, text: "Calculate true revenue recovery potential" },
-                { icon: <ShieldCheck className="w-4 h-4" />, text: "Generate a custom operational fix" }
+                { icon: <ShieldCheck className="w-4 h-4" />, text: "Design a custom growth strategy" }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 text-sm font-medium text-zinc-300">
                   <div className="w-6 h-6 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-red-500">
@@ -60,7 +60,7 @@ export function DiagnosisToolPreview() {
             <Link href="/contact" className="inline-block">
               <button className="group relative h-14 px-8 rounded-full bg-white text-black hover:bg-zinc-200 transition-all duration-300 flex items-center gap-3 text-sm tracking-widest uppercase font-bold shadow-[0_0_30px_rgba(255,255,255,0.2)] overflow-hidden">
                 <Terminal className="w-4 h-4 text-zinc-900 z-10 relative" />
-                <span className="z-10 relative">Initialize Scanner</span>
+                <span className="z-10 relative">Begin Audit</span>
                 <ArrowRight className="w-4 h-4 z-10 relative group-hover:translate-x-1 transition-transform" />
 
                 {/* Hover Scanner Effect inside button */}
@@ -89,8 +89,10 @@ export function DiagnosisToolPreview() {
                   <div className="w-3 h-3 rounded-full bg-zinc-800 border border-white/10"></div>
                   <div className="w-3 h-3 rounded-full bg-zinc-800 border border-white/10"></div>
                 </div>
-                <div className="text-[10px] uppercase tracking-widest text-zinc-600 font-mono font-bold">
-                  <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks_OS_Diagnostic_View
+                <div className="text-[10px] uppercase tracking-widest text-zinc-300 font-mono font-bold">
+                  <span className="whitespace-nowrap">
+                    <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks system Practice View
+                  </span>
                 </div>
                 <div className="w-10"></div> {/* Spacer for balance */}
               </div>

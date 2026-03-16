@@ -9,7 +9,7 @@ const RESEARCH_ARCHIVE = [
    {
       id: "RPT-089",
       title: "The 2026 Global Dental Clinic Benchmarks",
-      tag: "Telemetry",
+      tag: "Analytics",
       status: "Compiling Data",
       progress: 78
    },
@@ -87,7 +87,7 @@ export default function ResearchPage() {
                   transition={{ delay: 0.2 }}
                   className="text-lg md:text-xl text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed text-balance"
                >
-                  Deep-dive reports, whitepapers, and operational economics for the modern data-driven clinic. Currently processing 2026 aggregated telemetry.
+                  Deep-dive reports, whitepapers, and operational economics for the modern data-driven clinic. Currently processing 2026 aggregated practice data.
                </motion.p>
             </div>
 
@@ -104,7 +104,7 @@ export default function ResearchPage() {
                <input
                   type="text"
                   disabled
-                  placeholder="Querying secure database..."
+                  placeholder="Querying..."
                   className="w-full bg-[#080808]/90 backdrop-blur-md border border-white/10 rounded-2xl py-5 pl-12 pr-6 text-white font-mono text-sm shadow-[0_10px_30px_rgba(0,0,0,0.5)] outline-none opacity-80 cursor-not-allowed"
                />
                <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
@@ -160,7 +160,7 @@ export default function ResearchPage() {
                      {/* Overlay to indicate it's not clickable yet */}
                      <div className="absolute inset-0 bg-[#050505]/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20">
                         <div className="flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full text-xs font-bold font-mono text-red-400 uppercase tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.2)]">
-                           <Lock className="w-3.5 h-3.5" /> Encrypted Payload
+                           <Lock className="w-3.5 h-3.5" /> Secure Report
                         </div>
                      </div>
                   </motion.div>
@@ -179,7 +179,7 @@ export default function ResearchPage() {
                <FileText className="w-8 h-8 text-zinc-500 mx-auto mb-6" />
                <h3 className="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight">Request Early Access Clearance.</h3>
                <p className="text-sm text-zinc-400 font-light leading-relaxed mb-8 text-balance">
-                  These intelligence reports are currently being compiled using live pipeline telemetry from top-performing clinics. Request clearance below to be notified the moment the encryption lifts.
+                  These reports are currently being compiled using live pipeline data from top-performing clinics. Request clearance below to be notified the moment the report is ready.
                </p>
 
                <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 transition-all duration-300 flex items-center justify-center gap-3 text-xs tracking-[0.1em] uppercase font-bold shadow-[0_0_30px_rgba(255,255,255,0.1)] mx-auto">

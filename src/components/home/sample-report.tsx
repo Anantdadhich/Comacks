@@ -34,19 +34,19 @@ export function SampleReport() {
             </div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-white tracking-tighter mb-6 text-balance leading-[1.05]">
-              The 7-Page <br />
-              <span className="text-zinc-600">Intelligence Report.</span>
+              The 6-Page <br />
+              <span className="text-zinc-600">Practice Health Report.</span>
             </h2>
 
             <p className="text-lg text-zinc-400 font-light leading-relaxed mb-10 max-w-xl text-balance">
-              When you run a diagnostic scan, the system compiles a highly secure PDF dossier. It outlines every pipeline leak, industry benchmarks, and the exact architectural systems needed to recover your lost capital.
+              When you run a practice audit, the system creates a detailed PDF report. It shows your growth opportunities, success benchmarks, and the exact systems you need to scale your clinic.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <Link href="/report" className="w-full sm:w-auto">
                 <button className="group relative w-full sm:w-auto h-14 px-8 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-3 text-xs tracking-[0.1em] uppercase font-bold overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.02)]">
                   <FileText className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
-                  <span className="z-10 relative">View Sample Payload</span>
+                  <span className="z-10 relative">View Sample Report</span>
                   <ArrowRight className="w-4 h-4 z-10 relative group-hover:translate-x-1 transition-transform" />
                 </button>
               </Link>
@@ -85,9 +85,11 @@ export function SampleReport() {
                   <div>
                     <div className="flex items-center gap-1.5 mb-1.5">
                       <Activity className="w-3.5 h-3.5 text-red-500" />
-                      <span className="text-[8px] font-black uppercase tracking-widest text-white">Comacks_OS</span>
+                      <span className="text-[10px] font-black uppercase text-white whitespace-nowrap">
+                        <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks OS
+                      </span>
                     </div>
-                    <div className="text-[6px] font-mono text-zinc-500 uppercase">Diagnostic Payload</div>
+                    <div className="text-[6px] font-mono text-zinc-500 uppercase">Practice Audit</div>
                   </div>
                   <div className="text-right">
                     <div className="text-[6px] font-mono text-zinc-400">ID: SYS-0894</div>

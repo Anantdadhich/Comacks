@@ -58,9 +58,11 @@ model DiagnosisResult {
   monthly_loss Float
   annual_loss  Float
 
-  current_revenue   Float
-  potential_revenue Float
-  recovery          Float
+  current_revenue       Float
+  potential_revenue_min Float
+  potential_revenue_max Float
+  recovery_min          Float
+  recovery_max          Float
 
   created_at DateTime @default(now())
 

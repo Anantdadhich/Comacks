@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
-import { COUNTRY_CONFIGS, GLOBAL_TARGETS } from "@/lib/diagnosisEngine";
+import { calculateDiagnosis, COUNTRY_CONFIGS, GLOBAL_TARGETS, DiagnosisInput } from "@/lib/diagnosisEngine";
 import { Activity, Printer, Terminal, ShieldCheck, AlertTriangle, Cpu, ScanLine, Zap } from "lucide-react";
 import { PrintButton } from "./print-button";
 import Link from "next/link";
@@ -25,7 +25,7 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
     }
   }
 
-  // --- FALLBACK SAMPLE DATA ---
+
   if (!result) {
     input = {
       country: "India",
@@ -62,14 +62,26 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
     };
   }
 
+  const engineInput: DiagnosisInput = {
+    country: input.country,
+    monthlyInquiries: input.monthly_inquiries,
+    monthlyConsultations: input.monthly_consultations,
+    treatmentsStarted: input.treatments_started,
+    treatmentsCompleted: input.treatments_completed,
+    averageCaseValue: input.average_case_value,
+    patientsLastYear: input.patients_last_year,
+    patientsReturned: input.patients_returned,
+  };
+  const computedResult = calculateDiagnosis(engineInput);
+
   const currency = COUNTRY_CONFIGS[input!.country.toLowerCase()]?.currency || "$";
 
-  // System recommendations
+  // System recommendations (Simplified)
   const systems = [];
-  if (result.consult_rate < GLOBAL_TARGETS.consultTarget) systems.push({ name: "Inquiry System", desc: "Missed inquiries detected. Call tracking, AI follow-up, and website conversion fixes required." });
-  if (result.treatment_rate < GLOBAL_TARGETS.treatmentTarget) systems.push({ name: "Conversion System", desc: "Consultations are dropping. CRM tracking and automated patient education recommended." });
-  if (result.completion_rate < GLOBAL_TARGETS.completionTarget) systems.push({ name: "Completion System", desc: "Treatment abandonment detected. Reminder systems and financial integrations needed." });
-  if (result.recall_rate < GLOBAL_TARGETS.recallTarget) systems.push({ name: "Recall System", desc: "Low returning patients. Automated recall via SMS/Email required." });
+  if (computedResult.rates.consultRate < GLOBAL_TARGETS.consultTarget.min) systems.push({ name: "Inquiry System", desc: "Missed inquiries detected. Call tracking, AI follow-up, and website conversion fixes required." });
+  if (computedResult.rates.treatmentRate < GLOBAL_TARGETS.treatmentTarget.min) systems.push({ name: "Conversion System", desc: "Consultations are dropping. CRM tracking and automated patient education recommended." });
+  if (computedResult.rates.completionRate < GLOBAL_TARGETS.completionTarget.min) systems.push({ name: "Completion System", desc: "Treatment abandonment detected. Reminder systems and financial integrations needed." });
+  if (computedResult.rates.recallRate < GLOBAL_TARGETS.recallTarget.min) systems.push({ name: "Recall System", desc: "Low returning patients. Automated recall via SMS/Email required." });
   systems.push({ name: "Analytics Dashboard", desc: "Real-time foundational dashboard to track pipeline health." });
 
   return (
@@ -85,7 +97,11 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
           </div>
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-zinc-500 hidden sm:block" />
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-zinc-300"><span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks OS // Secure Document Viewer</span>
+            <span className="text-xs font-mono font-bold uppercase text-zinc-300 whitespace-nowrap">
+              <span className="inline-flex items-center">
+                <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks OS
+              </span> // Secure Document Viewer
+            </span>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -95,32 +111,32 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
       </div>
 
       {/* --- DOCUMENT CONTAINER --- */}
-      <div className="container mx-auto max-w-[210mm] bg-[#080808] border border-white/10 border-t-0 shadow-[0_0_80px_rgba(0,0,0,0.8)] p-0 print:m-0 print:border-none print:shadow-none print:w-full relative rounded-b-2xl">
+      <div className="container mx-auto max-w-[210mm] bg-[#080808] border border-white/10 border-t-0 shadow-[0_0_80px_rgba(0,0,0,0.8)] p-0 print:m-0 print:border-none print:shadow-none print:w-full relative rounded-b-2xl print:bg-white print:text-black">
 
         {/* PAGE 1: OVERVIEW */}
-        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-900/10 blur-[150px] rounded-full mix-blend-screen pointer-events-none"></div>
+        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after overflow-hidden print:p-12 print:border-b print:border-zinc-200">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-900/10 blur-[150px] rounded-full mix-blend-screen pointer-events-none print:hidden"></div>
 
-          <Header title="System Diagnostic Overview" clinic={user} />
+          <Header title="Practice Health Overview" clinic={user} />
 
           <div className="flex-1 flex flex-col justify-center items-center text-center relative z-10 mt-12">
-            <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-white/10 bg-white/5">
-              <Activity className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold">Overall System Health</span>
+            <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-white/10 bg-white/5 print:border-zinc-200 print:bg-transparent">
+              <Activity className="w-3.5 h-3.5 text-zinc-400 print:text-zinc-500" />
+              <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 print:text-zinc-500 font-bold">Overall System Health</span>
             </div>
 
-            <div className={`w-64 h-64 rounded-full border-2 flex flex-col items-center justify-center mb-16 ${result.score > 80 ? 'border-white/20' : 'border-red-500/30 bg-red-500/5 shadow-[0_0_50px_rgba(239,68,68,0.1)]'}`}>
-              <div className="text-8xl font-black text-white tracking-tighter">{Math.round(result.score)}</div>
+            <div className={`w-64 h-64 rounded-full border-2 flex flex-col items-center justify-center mb-16 ${computedResult.score > 80 ? 'border-white/20 print:border-zinc-300' : 'border-red-500/30 bg-red-500/5 shadow-[0_0_50px_rgba(239,68,68,0.1)] print:bg-transparent print:shadow-none print:border-red-500/50'}`}>
+              <div className="text-8xl font-black text-white print:text-black tracking-tighter">{Math.round(computedResult.score)}</div>
               <div className="text-xl font-mono text-zinc-500 mt-2">/ 100</div>
             </div>
 
-            <div className="w-full bg-[#110505] p-10 rounded-2xl border border-red-500/20 relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.1)_0,transparent_60%)]" />
+            <div className="w-full bg-[#110505] p-10 rounded-2xl border border-red-500/20 relative overflow-hidden print:bg-zinc-50 print:border-red-500/30">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.1)_0,transparent_60%)] print:hidden" />
               <h3 className="text-red-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 relative z-10 flex items-center justify-center gap-2">
-                <AlertTriangle className="w-4 h-4" /> Critical Revenue Loss Detected
+                <AlertTriangle className="w-4 h-4" /> Revenue Opportunity Detected
               </h3>
-              <div className="text-6xl font-mono font-black text-red-500 mb-4 relative z-10">{currency} {result.monthly_loss.toLocaleString()} <span className="text-2xl text-red-500/50">/mo</span></div>
-              <div className="text-red-400/80 font-mono text-sm relative z-10 bg-red-500/10 inline-block px-4 py-2 rounded-md border border-red-500/20">Projected Annual Deficit: {currency} {result.annual_loss.toLocaleString()}</div>
+              <div className="text-6xl font-mono font-black text-red-500 mb-4 relative z-10">{currency} {Math.round(computedResult.revenue.recoveryMax).toLocaleString()} <span className="text-2xl text-red-500/50">/mo</span></div>
+              <div className="text-red-400/80 font-mono text-sm relative z-10 bg-red-500/10 inline-block px-4 py-2 rounded-md border border-red-500/20 print:bg-red-50 print:border-red-100">Potential Annual Growth: {currency} {Math.round(computedResult.revenue.recoveryMax * 12).toLocaleString()}</div>
             </div>
           </div>
 
@@ -128,13 +144,13 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
         </div>
 
         {/* PAGE 2: PIPELINE */}
-        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10">
-          <Header title="Patient Flow Architecture" clinic={user} />
+        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10 print:border-zinc-200 print:p-12">
+          <Header title="Patient Growth Journey" clinic={user} />
 
           <div className="flex-1 flex flex-col justify-center mt-12">
-            <h2 className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-12 text-center">Current Funnel Mapping</h2>
+            <h2 className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-12 text-center">Patient Flow Analysis</h2>
             <div className="space-y-4 max-w-md mx-auto w-full relative">
-              <div className="absolute inset-y-0 left-1/2 w-px bg-white/10 -translate-x-1/2 z-0"></div>
+              <div className="absolute inset-y-0 left-1/2 w-px bg-white/10 -translate-x-1/2 z-0 print:bg-zinc-200"></div>
               {[
                 { label: "Inquiries Captured", val: input.monthly_inquiries },
                 { label: "Consultations Booked", val: input.monthly_consultations },
@@ -142,9 +158,9 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
                 { label: "Treatments Completed", val: input.treatments_completed },
               ].map((step, idx) => (
                 <div key={idx} className="relative z-10 flex flex-col items-center">
-                  <div className="w-full bg-[#111] border border-white/10 p-6 rounded-xl flex justify-between items-center shadow-xl">
-                    <span className="text-xs uppercase tracking-widest font-bold text-zinc-400">{step.label}</span>
-                    <span className="font-mono font-bold text-3xl text-white">{step.val}</span>
+                  <div className="w-full bg-[#111] border border-white/10 p-6 rounded-xl flex justify-between items-center shadow-xl print:bg-zinc-50 print:border-zinc-200 print:shadow-none">
+                    <span className="text-xs uppercase tracking-widest font-bold text-zinc-400 print:text-zinc-600">{step.label}</span>
+                    <span className="font-mono font-bold text-3xl text-white print:text-black">{step.val}</span>
                   </div>
                   {idx < 3 && <div className="h-8 w-px bg-red-500/50 my-2" />}
                 </div>
@@ -156,38 +172,39 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
         </div>
 
         {/* PAGE 3: LEAK ANALYSIS */}
-        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10">
-          <Header title="Vulnerability Map" clinic={user} />
+        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10 print:border-zinc-200 print:p-12">
+          <Header title="Growth Opportunities" clinic={user} />
 
           <div className="flex-1 flex flex-col justify-center gap-6 mt-12">
-            {[
-              { label: "Lead Leakage", val: result.lead_leak, desc: "Inquiries completely lost before booking consultations." },
-              { label: "Conversion Drop", val: result.conversion_leak, desc: "Consults rejecting or delaying treatment plans." },
-              { label: "Treatment Abandonment", val: result.completion_leak, desc: "Patients failing to complete active regimens." },
-              { label: "Recall Failure", val: result.recall_leak, desc: "Past database patients not returning this year." },
-            ].map((leak, idx) => {
-              const isLeak = leak.val > 0;
-              return (
-                <div key={idx} className={`p-6 rounded-xl border ${isLeak ? 'bg-[#110505] border-red-500/20' : 'bg-[#111] border-white/5'} flex items-center justify-between`}>
-                  <div className="flex items-start gap-4">
-                    <div className={`mt-1 w-8 h-8 rounded flex items-center justify-center border ${isLeak ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-white/5 border-white/10 text-zinc-600'}`}>
-                      {isLeak ? <AlertTriangle className="w-4 h-4" /> : <ShieldCheck className="w-4 h-4" />}
-                    </div>
-                    <div>
-                      <h3 className={`text-sm font-bold uppercase tracking-widest mb-1 ${isLeak ? 'text-red-400' : 'text-zinc-400'}`}>{leak.label}</h3>
-                      <p className={`text-xs ${isLeak ? 'text-red-500/70' : 'text-zinc-600'}`}>{leak.desc}</p>
-                    </div>
-                  </div>
-                  <div className={`text-4xl font-mono font-black ${isLeak ? 'text-red-500' : 'text-zinc-700'}`}>
-                    {isLeak ? `-${leak.val}` : '0'}
-                  </div>
-                </div>
-              )
-            })}
+            <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden print:border-zinc-200 print:bg-zinc-100">
+              <div className="bg-[#080808] p-8 print:bg-white">
+                <h4 className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-4">New Patient Loss</h4>
+                <p className="text-zinc-400 text-xs mb-6 leading-relaxed">Inquiries lost before booking consultations.</p>
+                <div className="text-3xl font-mono text-red-500">-{computedResult.leaks.leadLeak}</div>
+              </div>
+              <div className="bg-[#080808] p-8 print:bg-white">
+                <h4 className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-4">Consultation Gaps</h4>
+                <p className="text-zinc-400 text-xs mb-6 leading-relaxed">Consultations not moving forward to treatment.</p>
+                <div className="text-3xl font-mono text-red-500">-{computedResult.leaks.conversionLeak}</div>
+              </div>
+              <div className="bg-[#080808] p-8 print:bg-white">
+                <h4 className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-4">Incomplete Treatment</h4>
+                <p className="text-zinc-400 text-xs mb-6 leading-relaxed">Patients starting but not completing active care.</p>
+                <div className="text-3xl font-mono text-red-500">-{computedResult.leaks.completionLeak}</div>
+              </div>
+              <div className="bg-[#080808] p-8 print:bg-white">
+                <h4 className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-4">Inactive Patients</h4>
+                <p className="text-zinc-400 text-xs mb-6 leading-relaxed">Past patients who haven't returned this year.</p>
+                <div className="text-3xl font-mono text-red-500">-{computedResult.leaks.recallLeak}</div>
+              </div>
+            </div>
 
-            <div className="mt-12 pt-8 border-t border-white/10 flex flex-col items-center">
-              <h3 className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-4">Total Patient Deficit (Monthly)</h3>
-              <div className="text-7xl font-mono font-black text-white">{result.lost_patients}</div>
+            <div className="mt-12 p-8 bg-red-500/5 border border-red-500/10 rounded-2xl flex justify-between items-center print:bg-zinc-50 print:border-zinc-200">
+              <div>
+                <h4 className="text-xs text-red-500 font-bold uppercase tracking-widest mb-1">Total Patient Gap</h4>
+                <p className="text-zinc-500 text-[10px]">Monthly missed opportunities</p>
+              </div>
+              <div className="text-4xl font-mono font-black text-red-500">{computedResult.lostPatients}</div>
             </div>
           </div>
 
@@ -195,38 +212,38 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
         </div>
 
         {/* PAGE 4: BENCHMARK */}
-        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10">
-          <Header title="Performance Telemetry" clinic={user} />
+        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10 print:border-zinc-200 print:p-12">
+          <Header title="Growth Benchmarks" clinic={user} />
 
           <div className="flex-1 flex flex-col justify-center mt-12">
-            <div className="w-full bg-[#111] border border-white/5 rounded-2xl overflow-hidden">
+            <div className="w-full bg-[#111] border border-white/5 rounded-2xl overflow-hidden print:bg-white print:border-zinc-200 print:rounded-none">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-white/[0.02] border-b border-white/10">
+                  <tr className="bg-white/[0.02] border-b border-white/10 print:bg-zinc-50 print:border-zinc-200">
                     <th className="p-6 text-zinc-500 uppercase tracking-widest text-[10px] font-bold">System Metric</th>
                     <th className="p-6 text-zinc-500 uppercase tracking-widest text-[10px] font-bold">Actual</th>
                     <th className="p-6 text-zinc-500 uppercase tracking-widest text-[10px] font-bold">Target</th>
                     <th className="p-6 text-zinc-500 uppercase tracking-widest text-[10px] font-bold text-right">Variance</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-white/5 print:divide-zinc-200">
                   {[
-                    { l: "Consultation Acceptance", y: result.consult_rate, t: GLOBAL_TARGETS.consultTarget },
-                    { l: "Treatment Acceptance", y: result.treatment_rate, t: GLOBAL_TARGETS.treatmentTarget },
-                    { l: "Plan Completion", y: result.completion_rate, t: GLOBAL_TARGETS.completionTarget },
-                    { l: "Patient Reactivation", y: result.recall_rate, t: GLOBAL_TARGETS.recallTarget },
+                    { l: "Consultation Acceptance", y: computedResult.rates.consultRate, t: GLOBAL_TARGETS.consultTarget.min, tStr: GLOBAL_TARGETS.consultTarget.label },
+                    { l: "Treatment Acceptance", y: computedResult.rates.treatmentRate, t: GLOBAL_TARGETS.treatmentTarget.min, tStr: GLOBAL_TARGETS.treatmentTarget.label },
+                    { l: "Plan Completion", y: computedResult.rates.completionRate, t: GLOBAL_TARGETS.completionTarget.min, tStr: GLOBAL_TARGETS.completionTarget.label },
+                    { l: "Patient Reactivation", y: computedResult.rates.recallRate, t: GLOBAL_TARGETS.recallTarget.min, tStr: GLOBAL_TARGETS.recallTarget.label },
                   ].map((b, i) => {
                     const yours = Math.round(b.y * 100);
                     const tgt = Math.round(b.t * 100);
                     const gap = yours - tgt;
                     const isLeak = gap < 0;
                     return (
-                      <tr key={i} className="bg-[#0a0a0a]">
-                        <td className="p-6 text-xs font-bold uppercase tracking-wider text-zinc-300">{b.l}</td>
-                        <td className="p-6 text-lg font-mono text-white">{yours}%</td>
-                        <td className="p-6 text-lg font-mono text-zinc-600">{tgt}%</td>
+                      <tr key={i} className="bg-[#0a0a0a] print:bg-white">
+                        <td className="p-6 text-xs font-bold uppercase tracking-wider text-zinc-300 print:text-zinc-800">{b.l}</td>
+                        <td className="p-6 text-lg font-mono text-white print:text-black">{yours}%</td>
+                        <td className="p-6 text-lg font-mono text-zinc-600 print:text-zinc-400">{b.tStr}</td>
                         <td className="p-6 text-right">
-                          <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded text-[10px] font-mono font-bold border ${!isLeak ? 'bg-white/10 border-white/20 text-white' : 'bg-[#1a0505] border-red-500/30 text-red-400'}`}>
+                          <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded text-[10px] font-mono font-bold border ${!isLeak ? 'bg-white/10 border-white/20 text-white print:bg-zinc-100 print:border-zinc-200 print:text-zinc-600' : 'bg-[#1a0505] border-red-500/30 text-red-400 print:bg-red-50 print:border-red-100 print:text-red-700'}`}>
                             {gap > 0 ? '+' : ''}{gap}%
                           </span>
                         </td>
@@ -242,99 +259,108 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
         </div>
 
         {/* PAGE 5: REVENUE RECOVERY */}
-        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10">
-          <Header title="Capital Recovery Projections" clinic={user} />
+        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10 print:border-zinc-200 print:p-12">
+          <Header title="Revenue Growth Projections" clinic={user} />
 
-          <div className="flex-1 flex flex-col items-center justify-center text-center mt-12">
-            <Zap className="w-8 h-8 text-zinc-600 mb-6" />
-            <p className="text-sm text-zinc-400 mb-16 max-w-md mx-auto leading-relaxed font-light">
-              Mathematical projection of gross revenue if the Comacks Operating System bridges the negative variance gaps.
-            </p>
+          <div className="flex-1 flex flex-col items-center justify-center">
+            <div className="mb-10">
+              <h2 className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-2">Financial Potential</h2>
+              <h3 className="text-2xl text-white print:text-black font-medium tracking-tight">Growth Opportunity</h3>
+              <p className="text-zinc-500 text-xs mt-4 leading-relaxed max-w-xl">Mathematical projection of gross revenue if the Comacks Growth System is implemented to bridge critical gaps.</p>
+            </div>
 
             <div className="flex flex-col w-full gap-4 mb-16">
-              <div className="bg-[#111] border border-white/5 p-8 rounded-2xl flex justify-between items-center">
+              <div className="bg-[#111] border border-white/5 p-8 rounded-2xl flex justify-between items-center print:bg-white print:border-zinc-200 print:rounded-lg">
                 <div className="text-left">
-                  <h4 className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-1">Current Output</h4>
+                  <h4 className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-1 print:text-zinc-400">Current Output</h4>
                   <div className="text-xs text-zinc-600 font-mono">Status Quo</div>
                 </div>
-                <div className="text-3xl font-mono font-bold text-zinc-400">{currency} {result.current_revenue.toLocaleString()}</div>
+                <div className="text-3xl font-mono font-bold text-zinc-400 print:text-zinc-500">{currency} {computedResult.revenue.currentRevenue.toLocaleString()}</div>
               </div>
 
-              <div className="bg-white/5 border border-white/10 p-8 rounded-2xl flex justify-between items-center shadow-[0_0_30px_rgba(255,255,255,0.05)]">
-                <div className="text-left">
-                  <h4 className="text-[10px] text-white uppercase tracking-widest font-bold mb-1">Optimized Output</h4>
-                  <div className="text-xs text-zinc-400 font-mono">Comacks Target</div>
+              <div className="bg-white/5 border border-white/10 p-8 rounded-2xl flex flex-row justify-between items-center shadow-[0_0_30px_rgba(255,255,255,0.05)] print:bg-zinc-50 print:border-zinc-200 print:shadow-none print:rounded-lg gap-4">
+                <div className="text-left shrink-0">
+                  <h4 className="text-[10px] text-white print:text-zinc-800 uppercase tracking-widest font-bold mb-1">Future Output <span className="text-zinc-500 print:text-zinc-400 ml-2 font-light lowercase">Top Clinics Goal</span></h4>
                 </div>
-                <div className="text-4xl font-mono font-black text-white">{currency} {result.potential_revenue.toLocaleString()}</div>
+                <div className="text-2xl lg:text-3xl font-mono font-black text-white print:text-black whitespace-nowrap">
+                  {computedResult.revenue.recoveryMin === 0 ? (
+                    `Up to ${currency} ${Math.round(computedResult.revenue.potentialRevenueMax).toLocaleString()}`
+                  ) : (
+                    `${currency} ${Math.round(computedResult.revenue.potentialRevenueMin).toLocaleString()} – ${currency} ${Math.round(computedResult.revenue.potentialRevenueMax).toLocaleString()}`
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="w-full pt-10 border-t border-white/10 flex flex-col items-center">
-              <h3 className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-4">Total Recovery Potential</h3>
-              <div className="text-5xl font-mono font-black text-white mb-2">+{currency} {result.recovery.toLocaleString()} <span className="text-xl text-zinc-600">/mo</span></div>
-              <div className="text-sm font-mono text-zinc-500 bg-[#111] px-4 py-2 rounded-md border border-white/5 mt-4">Yearly Projection: +{currency} {(result.recovery * 12).toLocaleString()}</div>
+            <div className="w-full pt-10 border-t border-white/10 print:border-zinc-200 flex flex-col items-center">
+              <h3 className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] mb-4">Total Growth Potential</h3>
+              <div className="text-2xl lg:text-4xl font-mono font-black text-white print:text-black mb-2 whitespace-nowrap">
+                {computedResult.revenue.recoveryMin === 0 ? (
+                  `+ Up to ${currency} ${Math.round(computedResult.revenue.recoveryMax).toLocaleString()}`
+                ) : (
+                  `+${currency} ${Math.round(computedResult.revenue.recoveryMin).toLocaleString()} – ${currency} ${Math.round(computedResult.revenue.recoveryMax).toLocaleString()}`
+                )} <span className="text-xl text-zinc-600">/mo</span>
+              </div>
+              <div className="text-sm font-mono text-zinc-500 bg-[#111] px-4 py-2 rounded-md border border-white/5 mt-4 print:bg-zinc-50 print:border-zinc-100 whitespace-nowrap">
+                Yearly Projection: {computedResult.revenue.recoveryMin === 0 ? (
+                  `+ Up to ${currency} ${Math.round(computedResult.revenue.recoveryMax * 12).toLocaleString()}`
+                ) : (
+                  `+${currency} ${Math.round(computedResult.revenue.recoveryMin * 12).toLocaleString()} – ${currency} ${Math.round(computedResult.revenue.recoveryMax * 12).toLocaleString()}`
+                )}
+              </div>
             </div>
           </div>
           <Footer page={5} />
         </div>
 
-        {/* PAGE 6: SYSTEMS NEEDED */}
-        <div className="min-h-[297mm] p-16 flex flex-col relative page-break-after border-t border-white/10">
-          <Header title="Required Architecture" clinic={user} />
+        {/* PAGE 6: SYSTEMS & IMPLEMENTATION */}
+        <div className="min-h-[297mm] p-16 flex flex-col relative border-t border-white/10 print:border-zinc-200 print:p-12">
+          <Header title="Implementation Strategy" clinic={user} />
 
-          <div className="flex-1 flex flex-col justify-center mt-12">
-            <h2 className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-8">Recommended System Installs</h2>
-            <div className="space-y-4">
-              {systems.map((sys, idx) => (
-                <div key={idx} className="bg-[#111] p-6 rounded-xl border border-white/5 flex items-start gap-6">
-                  <div className="w-10 h-10 bg-white/5 border border-white/10 rounded flex items-center justify-center font-mono text-xs text-zinc-400 shrink-0">
-                    0{idx + 1}
+          <div className="flex-1 flex flex-col justify-center gap-12 mt-12">
+            <div>
+              <h2 className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-8">Recommended System Installs</h2>
+              <div className="grid grid-cols-1 gap-3">
+                {systems.map((sys, idx) => (
+                  <div key={idx} className="bg-[#111] p-5 rounded-xl border border-white/5 flex items-start gap-4 print:bg-white print:border-zinc-200 print:rounded-none">
+                    <div className="w-8 h-8 bg-white/5 border border-white/10 rounded flex items-center justify-center font-mono text-[10px] text-zinc-400 shrink-0 print:border-zinc-300 print:text-zinc-800">
+                      0{idx + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-[10px] font-bold uppercase tracking-widest text-white print:text-zinc-800 mb-1">{sys.name}</h3>
+                      <p className="text-[10px] text-zinc-500 leading-relaxed font-light print:text-zinc-600">
+                        {sys.desc}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-2">{sys.name}</h3>
-                    <p className="text-xs text-zinc-500 leading-relaxed font-light">
-                      {sys.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-12 border-t border-white/5 flex flex-col items-center text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-white rounded-xl mb-6 print:border print:border-zinc-200">
+                <ScanLine className="w-6 h-6 text-black" />
+              </div>
+              <h2 className="text-3xl font-medium tracking-tighter text-white print:text-black mb-4">Book Your Meeting.</h2>
+              <p className="text-xs text-zinc-400 print:text-zinc-600 max-w-sm mx-auto mb-8 leading-relaxed font-light">
+                Your growth roadmap is ready. The next step is a simple strategy call with our team.
+              </p>
+
+              <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-0 relative z-10 print:hidden">
+                <Link href="/contact" className="w-full max-w-sm">
+                  <button className="w-full py-4 px-12 rounded-xl bg-white text-black font-bold text-[10px] uppercase tracking-widest shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                    Secure Your Slot
+                  </button>
+                </Link>
+              </div>
+
+              <div className="mt-8 text-[10px] uppercase tracking-widest text-zinc-600 font-bold">
+                Contact: <a href="mailto:arpit@comacks.com" className="text-white print:text-black hover:text-red-500 transition-colors underline">arpit@comacks.com</a>
+              </div>
             </div>
           </div>
+
           <Footer page={6} />
-        </div>
-
-        {/* PAGE 7: NEXT STEP */}
-        <div className="min-h-[297mm] p-16 flex flex-col relative border-t border-white/10">
-          <Header title="Strategic Deployment" clinic={user} />
-
-          <div className="flex-1 flex flex-col justify-center items-center text-center mt-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-xl mb-8">
-              <ScanLine className="w-8 h-8 text-black" />
-            </div>
-            <h2 className="text-4xl font-medium tracking-tighter text-white mb-6">Initialize Deployment.</h2>
-            <p className="text-sm text-zinc-400 max-w-md mx-auto mb-12 leading-relaxed font-light">
-              The vulnerabilities have been mapped. The next step is a deep-dive technical strategy call with our architects to plan the installation of the Comacks OS into your clinic.
-            </p>
-
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-12 relative z-10">
-              <Link href="https://calendly.com/" target="_blank" className="w-full max-w-xs">
-                <button className="w-full py-4 rounded-xl bg-white text-black font-bold text-xs uppercase tracking-widest shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                  Secure Your Slot
-                </button>
-              </Link>
-              <Link href="/contact" className="w-full max-w-xs">
-                <button className="w-full py-4 rounded-xl bg-red-600 border border-red-500 text-white font-bold text-xs uppercase tracking-widest shadow-[0_0_30px_rgba(239,68,68,0.3)]">
-                  Contact Architect
-                </button>
-              </Link>
-            </div>
-
-            <div className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">
-              Support: <a href="mailto:arpit@comacks.com" className="text-white hover:text-red-500 transition-colors">arpit@comacks.com</a>
-            </div>
-          </div>
-
-          <Footer page={7} />
         </div>
 
       </div>
@@ -344,16 +370,36 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
         __html: `
         @media print {
           @page { margin: 0; size: A4 portrait; }
-          body { 
-            background: #050505 !important; 
+          html, body { 
+            background: white !important; 
+            color: black !important;
             -webkit-print-color-adjust: exact; 
             print-color-adjust: exact; 
           }
           .page-break-after { break-after: page; }
-          /* Ensure backgrounds and glows print exactly as they look on screen */
+          /* Reset common background colors for print */
+          .bg-\\[\\#050505\\], .bg-\\[\\#080808\\], .bg-\\[\\#111\\], .bg-\\[\\#0a0a0a\\], .bg-\\[\\#110505\\] {
+            background: white !important;
+          }
+          /* Fix text colors */
+          .text-zinc-200, .text-zinc-400, .text-zinc-500, .text-zinc-600, .text-white {
+            color: #333 !important;
+          }
+          .text-red-500 {
+            color: #ef4444 !important;
+          }
+          /* Custom overrides for specific components to ensure white background */
+          .print\\:bg-white { background: white !important; }
+          .print\\:bg-zinc-50 { background: #f9fafb !important; }
+          .print\\:text-black { color: black !important; }
+          .print\\:border-zinc-200 { border-color: #e5e7eb !important; }
+          
+          /* Force backgrounds to be white unless explicitly set to zinc-50 etc */
           * {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+            text-shadow: none !important;
+            box-shadow: none !important;
           }
         }
       `}} />
@@ -363,19 +409,21 @@ export default async function ReportPage(props: { searchParams: Promise<{ id?: s
 
 function Header({ title, clinic }: { title: string; clinic: any }) {
   return (
-    <div className={`flex justify-between items-start border-b border-white/10 pb-6 print:pb-4 absolute top-16 left-16 right-16 z-20`}>
+    <div className={`flex justify-between items-start border-b border-white/10 print:border-zinc-300 pb-6 print:pb-4 absolute top-16 left-16 right-16 z-20`}>
       <div>
-        <h1 className="text-lg font-black text-white flex items-center gap-2 tracking-tight">
+        <h1 className="text-lg font-black text-white print:text-black flex items-center gap-2 tracking-tight">
           <Activity className="w-5 h-5 text-red-500" />
-          <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks_OS
+          <span className="inline-flex items-center whitespace-nowrap">
+            <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks OS
+          </span>
         </h1>
-        <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mt-2">System Diagnostic Output</div>
+        <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 print:text-zinc-400 mt-2">Practice Health Report</div>
       </div>
       <div className="text-right">
-        <div className={`font-mono text-xs font-bold text-white`}>{clinic?.clinic_name || "Diagnostic Report"}</div>
-        <div className={`text-[10px] font-mono text-zinc-500 mt-2`}>{new Date().toLocaleDateString()}</div>
+        <div className={`font-mono text-xs font-bold text-white print:text-zinc-800`}>{clinic?.clinic_name || "Diagnostic Report"}</div>
+        <div className={`text-[10px] font-mono text-zinc-500 print:text-zinc-400 mt-2`}>{new Date().toLocaleDateString()}</div>
       </div>
-      <div className={`absolute -bottom-6 left-0 font-bold uppercase tracking-[0.2em] text-[10px] text-zinc-400 bg-[#080808] pr-4`}>
+      <div className={`absolute -bottom-6 left-0 font-bold uppercase tracking-[0.2em] text-[10px] text-zinc-400 bg-[#080808] print:bg-white pr-4`}>
         {title}
       </div>
     </div>
@@ -384,12 +432,12 @@ function Header({ title, clinic }: { title: string; clinic: any }) {
 
 function Footer({ page }: { page: number }) {
   return (
-    <div className={`flex justify-between items-center text-[10px] text-zinc-600 uppercase font-mono font-bold tracking-widest absolute bottom-16 left-16 right-16 z-20 border-t border-white/5 pt-6`}>
-      <span className="flex items-center gap-2">
+    <div className={`flex justify-between items-center text-[10px] text-zinc-600 uppercase font-mono font-bold whitespace-nowrap absolute bottom-16 left-16 right-16 z-20 border-t border-white/5 print:border-zinc-100 pt-6`}>
+      <span className="flex items-center gap-2 whitespace-nowrap">
         <Cpu className="w-3 h-3" />
-        <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks Intelligence Group
+        Comacks Group
       </span>
-      <span>Page 0{page} / 07</span>
+      <span>Page 0{page} / 06</span>
     </div>
   );
 }

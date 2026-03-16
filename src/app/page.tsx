@@ -25,7 +25,7 @@ export default function Home() {
       <BenchmarkComparison />
       <ExpectedGap />
       <DiagnosisToolPreview />
-      <PlatformPreview />
+
       <SystemLayers />
       <SampleReport />
       <ResultsProof />

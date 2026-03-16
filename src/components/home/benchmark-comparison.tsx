@@ -85,9 +85,11 @@ export function BenchmarkComparison() {
                 <div className="w-3 h-1 bg-white/80 rounded-full"></div>
                 Your Baseline
               </div>
-              <div className="flex items-center gap-2 text-red-500">
+              <div className="flex items-center gap-2 text-red-500 whitespace-nowrap">
                 <div className="w-3 h-1 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
-                <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks Standard
+                <span className="text-[10px] font-black uppercase text-white whitespace-nowrap">
+                  <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks Standard
+                </span>
               </div>
             </div>
           </div>

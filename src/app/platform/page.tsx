@@ -47,7 +47,7 @@ export default function PlatformPage() {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed text-balance"
           >
-            The <span className="font-bold text-white"><span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks</span> platform provides real-time telemetry into your entire patient pipeline, mapping exactly where revenue leaks occur so we can patch them intelligently.
+            The <span className="font-bold text-white"><span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks</span> platform provides real-time performance insights into your entire patient pipeline, mapping exactly where revenue leaks occur so we can patch them intelligently.
           </motion.p>
         </div>
 
@@ -72,7 +72,7 @@ export default function PlatformPage() {
                 </div>
                 <span className="text-[9px] font-mono text-zinc-600 uppercase tracking-widest px-2 py-1 bg-white/5 border border-white/5 rounded">MOD-01</span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-medium mb-3 text-white tracking-tight">Live Pipeline Telemetry</h2>
+              <h2 className="text-2xl md:text-3xl font-medium mb-3 text-white tracking-tight">Live Pipeline Analytics</h2>
               <p className="text-zinc-400 leading-relaxed font-light text-sm md:text-base max-w-md">Connect your existing clinic data into our unified dashboard. Watch inquiries turn into completed treatments and spot bottleneck stages instantly.</p>
             </div>
 

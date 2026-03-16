@@ -75,7 +75,7 @@ export function Footer() {
         <div className="border-t border-white/5 pt-8 pl-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[10px] uppercase tracking-widest text-zinc-600 font-mono">
 
           <div className="flex items-center gap-2">
-            <p>&copy; {new Date().getFullYear()} Comacks.</p>
+            <p>&copy; 2023 Comacks.</p>
             <span className="hidden md:inline text-zinc-800">|</span>
             <p className="hidden md:inline">All rights reserved.</p>
           </div>

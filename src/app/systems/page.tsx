@@ -11,7 +11,7 @@ const SYSTEMS_DATA = [
     version: "v2.4",
     name: "Inquiry Generation System",
     desc: "Architected exclusively for clinics suffering from empty pipelines. We build the top-of-funnel engine to predictably attract and capture high-intent patients.",
-    components: ["PPC (Google Ads) Network", "Meta Ads Distribution", "Local SEO Optimization", "High-Converting Web Architecture", "AI Follow-up Bot", "Call Tracking Protocol"],
+    components: ["PPC (Google Ads) Network", "Meta Ads Distribution", "Local SEO Optimization", "High-Converting Web Architecture", " Follow-up System", "Call Tracking Protocol"],
     icon: Network
   },
   {
@@ -43,7 +43,7 @@ const SYSTEMS_DATA = [
     version: "v4.0",
     name: "Analytics System",
     desc: "The core foundational layer standard across all partnered clinics to track real pipeline numbers and map leak points accurately.",
-    components: ["<span className='text-red-500'>C</span>oma<span className='text-red-500'>c</span>ks Real-Time Dashboard", "Lead Source Tracking", "Revenue Gap Calculation", "Performance Telemetry"],
+    components: [" Real-Time Dashboard", "Lead Source Tracking", "Revenue Gap Calculation", "Growth Metrics"],
     icon: Layers
   }
 ];

@@ -58,8 +58,10 @@ export async function POST(request: Request) {
             monthly_loss: results.revenue.monthlyLoss,
             annual_loss: results.revenue.annualLoss,
             current_revenue: results.revenue.currentRevenue,
-            potential_revenue: results.revenue.potentialRevenue,
-            recovery: results.revenue.recovery,
+            potential_revenue_min: results.revenue.potentialRevenueMin,
+            potential_revenue_max: results.revenue.potentialRevenueMax,
+            recovery_min: results.revenue.recoveryMin,
+            recovery_max: results.revenue.recoveryMax,
           }
         }
       },

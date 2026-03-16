@@ -1,43 +1,42 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { PhoneMissed, Handshake, Users, RefreshCcw, ArrowRight } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 
-// --- DATA: Separated for clean maintenance ---
+
 const REVENUE_LEAKS = [
   {
     id: 1,
     icon: <PhoneMissed className="w-5 h-5" />,
     title: "Missed Inquiries",
-    description: "Inbound calls and messages that go unanswered during peak clinic hours or after closing.",
+    description: "Potential patients calling or messaging your clinic but receiving no response during busy hours or after closing.",
     highlight: "Acquisition Leak",
   },
   {
     id: 2,
     icon: <Handshake className="w-5 h-5" />,
-    title: "Low Conversion",
-    description: "Patients who attend initial consults but leave without committing to a full treatment plan.",
+    title: "Low Consultation Conversion",
+    description: "Patients attend consultations but do not move forward with the recommended treatment plan.",
     highlight: "Sales Leak",
   },
   {
     id: 3,
     icon: <Users className="w-5 h-5" />,
     title: "Treatment Drop-off",
-    description: "Patients failing to complete their multi-session courses, leaving booked revenue on the table.",
+    description: "Patients start treatment but fail to complete their full session plan, leaving revenue unrealized.",
     highlight: "Fulfillment Leak",
   },
   {
     id: 4,
     icon: <RefreshCcw className="w-5 h-5" />,
-    title: "No Reactivation",
-    description: "Past patients who haven't visited in 12+ months due to zero automated follow-up campaigns.",
+    title: "Patients Not Returning",
+    description: "Past patients stop visiting because there are no automated reminders, recalls, or follow-ups.",
     highlight: "Retention Leak",
   },
 ];
-
 // --- ANIMATION VARIANTS ---
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -45,7 +44,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,

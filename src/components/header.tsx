@@ -10,7 +10,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Handle Scroll State
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -24,25 +24,25 @@ export function Header() {
   }, [pathname]);
 
   const headerClasses = isMenuOpen
-    ? "bg-[#050505] py-6 border-b border-white/10" // Solid Black when Open
+    ? "bg-[#050505] py-6 border-b border-white/10"
     : isScrolled
-      ? "bg-[#050505]/95 backdrop-blur-md py-4 border-b border-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" // Compact + Blur when Scrolled
-      : "bg-transparent py-6 border-b border-transparent"; // Transparent at Top
+      ? "bg-[#050505]/95 backdrop-blur-md py-4 border-b border-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+      : "bg-transparent py-6 border-b border-transparent";
 
   return (
     <>
       <header className={`print:hidden fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${headerClasses}`}>
         <div className="relative z-50 container mx-auto px-4 md:px-8 max-w-[1400px] flex items-center justify-between">
 
-          {/* --- LOGO AREA --- */}
+
           <div className="flex items-center gap-12">
             <Link href="/" className="flex items-center gap-2 group shrink-0">
-              <span className="text-sm font-bold tracking-[0.2em]  text-white block">
+              <span className="text-sm font-bold tracking-[0.2em]  text-white block uppercase tracking-tightest word-spacing:-0.2em">
                 <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks
               </span>
             </Link>
 
-            {/* DESKTOP NAV (Hidden on Tablet/Mobile to prevent crowding) */}
+
             <nav className="hidden xl:flex items-center gap-6 text-[10px] font-bold tracking-widest uppercase text-zinc-500">
               <NavLink href="/" label="Home" />
               <NavLink href="/diagnosis" label="Clinic Diagnosis" />
@@ -56,7 +56,6 @@ export function Header() {
             </nav>
           </div>
 
-          {/* --- RIGHT CONTROLS (CTAs Always Visible) --- */}
           <div className="flex items-center gap-3 md:gap-6 shrink-0">
 
             {/* Secondary CTA: Desktop Only */}

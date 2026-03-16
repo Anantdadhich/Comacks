@@ -17,6 +17,7 @@ import {
    Terminal
 } from 'lucide-react';
 import Link from 'next/link';
+import { PlatformPreview } from '../home/platform-preview';
 
 export function AboutUs() {
    return (
@@ -151,6 +152,7 @@ export function AboutUs() {
                </div>
             </div>
          </section>
+         <PlatformPreview></PlatformPreview>
 
          {/* --- Section 4: CORE PRINCIPLES (Brighter Red) --- */}
          <section className="relative py-24 px-6 border-t border-white/5 overflow-hidden">
@@ -209,6 +211,7 @@ export function AboutUs() {
          </section>
 
 
+
          {/* --- Section 5: CTA --- */}
          <section className="relative py-24 px-6 md:px-12 bg-gradient-to-b from-[#050505] to-[#0A0A0A] border-t border-white/5">
             <div className="container mx-auto max-w-4xl text-center">
@@ -218,7 +221,7 @@ export function AboutUs() {
                </p>
 
                <Button className="h-14 px-8 rounded-full bg-white text-black hover:bg-zinc-200 border-0 transition-all duration-300 text-sm tracking-widest uppercase font-bold shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)]">
-                  <Link href="/contact">
+                  <Link href="/diagnosis">
                      Request Diagnosis
                   </Link>
                </Button>

@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Terminal, ShieldCheck, Activity, Database, CheckCircle2 } from "lucide-react";
+import { Testimonials } from "@/components/home/testimonials";
 
 // --- VERIFIED DEPLOYMENT DATA ---
 const CASE_STUDIES = [
@@ -88,7 +89,7 @@ export default function CaseStudiesPage() {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed text-balance"
           >
-            Real clinics, patched pipeline leaks, and verified capital recovery. Zero fluff. Pure telemetry output.
+            Real clinics, patched pipeline leaks, and verified capital recovery. Zero fluff. Pure growth output.
           </motion.p>
         </div>
 
@@ -165,6 +166,7 @@ export default function CaseStudiesPage() {
         </div>
 
       </div>
+      <Testimonials></Testimonials>
     </div>
   );
 }

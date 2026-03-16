@@ -3,7 +3,7 @@
 import { useState, } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { calculateDiagnosis, COUNTRY_CONFIGS, DiagnosisInput } from "@/lib/diagnosisEngine";
+import { calculateDiagnosis, COUNTRY_CONFIGS, DiagnosisInput, GLOBAL_TARGETS } from "@/lib/diagnosisEngine";
 import { Terminal, ArrowRight, DollarSign, Target, Activity, ScanLine, AlertTriangle, Cpu, BarChart2, ShieldCheck, Repeat, Pointer, EqualApproximatelyIcon } from "lucide-react";
 
 export default function DiagnosisPage() {
@@ -64,13 +64,13 @@ export default function DiagnosisPage() {
             <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)]">
               <ScanLine className="w-3.5 h-3.5 text-zinc-400" />
               <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
-                Live Audit Engine Running
+                Live Audit Engine
               </span>
             </div>
             <h1 className="text-3xl md:text-5xl font-medium text-white tracking-tighter">
-              Clinic <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks <span className="text-zinc-600">Diagnosis.</span>
+              <span> Clinic  Diagnosis.</span>
             </h1>
-            <p className="text-zinc-400 mt-3 max-w-xl font-light">Input your monthly metrics below. The <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks system will map your patient flow and identify immediate revenue leaks in real-time.</p>
+            <p className="text-zinc-300 mt-3 max-w-xl font-light">Input your monthly metrics below. The <span className="text-red-500">C</span>oma<span className="text-red-500">c</span>ks system will map your patient flow and identify immediate revenue leaks in real-time.</p>
           </div>
         </div>
 
@@ -87,7 +87,7 @@ export default function DiagnosisPage() {
 
             <h2 className="text-sm font-bold text-zinc-300 mb-8 uppercase tracking-widest flex items-center gap-2 relative z-10">
               <Terminal className="w-4 h-4 text-zinc-500" />
-              Data Entry Parameters
+              Clinic Performance Check
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
@@ -95,7 +95,7 @@ export default function DiagnosisPage() {
               {/* Core Funnel Inputs */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="md:col-span-2">
-                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Operating Region</label>
+                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Currency</label>
                   <select
                     name="country"
                     value={formData.country}
@@ -108,13 +108,13 @@ export default function DiagnosisPage() {
                   </select>
                 </div>
 
-                <InputField label="Monthly Inquiries" name="monthlyInquiries" value={formData.monthlyInquiries} onChange={handleInputChange} />
-                <InputField label="Consultations Booked" name="monthlyConsultations" value={formData.monthlyConsultations} onChange={handleInputChange} />
-                <InputField label="Treatments Started" name="treatmentsStarted" value={formData.treatmentsStarted} onChange={handleInputChange} />
-                <InputField label="Treatments Completed" name="treatmentsCompleted" value={formData.treatmentsCompleted} onChange={handleInputChange} />
+                <InputField label="Patient Enquiries (Per Month)" name="monthlyInquiries" value={formData.monthlyInquiries} onChange={handleInputChange} />
+                <InputField label="Consultations (Per Month)" name="monthlyConsultations" value={formData.monthlyConsultations} onChange={handleInputChange} />
+                <InputField label="Patients Starting Treatment" name="treatmentsStarted" value={formData.treatmentsStarted} onChange={handleInputChange} />
+                <InputField label="Patients Finishing Treatment" name="treatmentsCompleted" value={formData.treatmentsCompleted} onChange={handleInputChange} />
 
                 <div className="md:col-span-2 relative">
-                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Average Case Value ({currency})</label>
+                  <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Average Treatment Value ({currency})</label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 font-mono text-sm">{currency}</span>
                     <input
@@ -131,8 +131,8 @@ export default function DiagnosisPage() {
 
               {/* Retention Inputs */}
               <div className="pt-6 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-5 relative">
-                <InputField label="Total Patients (Last 12M)" name="patientsLastYear" value={formData.patientsLastYear} onChange={handleInputChange} />
-                <InputField label="Patients Returned (YTD)" name="patientsReturned" value={formData.patientsReturned} onChange={handleInputChange} />
+                <InputField label="Total Active Patients (Last Year)" name="patientsLastYear" value={formData.patientsLastYear} onChange={handleInputChange} />
+                <InputField label="Returning Patients (This Year)" name="patientsReturned" value={formData.patientsReturned} onChange={handleInputChange} />
               </div>
 
               <button
@@ -140,7 +140,7 @@ export default function DiagnosisPage() {
                 disabled={isLoading}
                 className="w-full mt-8 group relative h-14 rounded-lg bg-white text-black hover:bg-zinc-200 transition-all duration-300 flex items-center justify-center gap-3 text-xs tracking-[0.2em] uppercase font-bold disabled:opacity-50 overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.1)]"
               >
-                <span className="z-10 relative">{isLoading ? "Processing Data..." : "Initialize Deep Scan"}</span>
+                <span className="z-10 relative">{isLoading ? "Analyzing..." : "Start Practice Audit"}</span>
                 <ArrowRight className="w-4 h-4 z-10 relative group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] skew-x-12 z-0"></div>
               </button>
@@ -153,10 +153,10 @@ export default function DiagnosisPage() {
 
             <div className="w-full max-w-[200px] space-y-8 z-10">
               {[
-                { label: "Inquiries", val: formData.monthlyInquiries, active: formData.monthlyInquiries > 0 },
-                { label: "Consults", val: formData.monthlyConsultations, active: formData.monthlyConsultations > 0 },
-                { label: "Treatments", val: formData.treatmentsStarted, active: formData.treatmentsStarted > 0 },
-                { label: "Completed", val: formData.treatmentsCompleted, active: formData.treatmentsCompleted > 0 },
+                { label: "Enquiries", val: formData.monthlyInquiries, active: formData.monthlyInquiries > 0 },
+                { label: "Consultations", val: formData.monthlyConsultations, active: formData.monthlyConsultations > 0 },
+                { label: "Starting", val: formData.treatmentsStarted, active: formData.treatmentsStarted > 0 },
+                { label: "Finished", val: formData.treatmentsCompleted, active: formData.treatmentsCompleted > 0 },
               ].map((step, idx) => (
                 <div key={idx} className="relative group">
                   <div className={`w-full p-4 rounded-xl border flex flex-col items-center justify-center transition-all duration-300 backdrop-blur-md
@@ -191,7 +191,7 @@ export default function DiagnosisPage() {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay pointer-events-none" />
                 <h2 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">
                   <Terminal className="w-4 h-4 text-zinc-500" />
-                  System Analysis Output
+                  Audit Results
                 </h2>
                 <div className="flex items-center justify-between">
                   <div>
@@ -199,7 +199,7 @@ export default function DiagnosisPage() {
                       <span className="text-6xl font-medium tracking-tighter text-white">{currentResult.score}</span>
                       <span className="text-lg text-zinc-600 font-mono">/100</span>
                     </div>
-                    <div className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold mb-1">System Health Score</div>
+                    <div className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Practice Health Score</div>
                   </div>
                   <div className={`w-16 h-16 rounded-full border-4 flex items-center justify-center relative transition-colors
                             ${currentResult.score >= 80 ? 'border-white/20 text-white' : currentResult.score >= 50 ? 'border-zinc-700 text-zinc-400' : 'border-red-500/50 text-red-500 shadow-[0_0_15px_rgba(239,68,68,0.2)]'}`}
@@ -213,7 +213,7 @@ export default function DiagnosisPage() {
             {/* The Dynamic, Constricted Pipeline Funnel */}
             <div className="relative z-10 flex flex-col gap-6">
               <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">
-                <ScanLine className="w-4 h-4 text-red-500 animate-pulse" /> Live Telemetry: Constricted Funnel Mapping
+                <ScanLine className="w-4 h-4 text-red-500 animate-pulse" /> Growth Analysis
               </h3>
 
               {/* --- The Funnel Stack --- */}
@@ -262,9 +262,9 @@ export default function DiagnosisPage() {
 
                 {/* The 3 Rate blocks: Causal flow. Motion casual linkage: low rate -> narrow constriction */}
                 {[
-                  { label: "Consult Rate", target: 0.50, actual: currentResult.rates.consultRate, input: "Inquiries", output: "Consults", icon: EqualApproximatelyIcon },
-                  { label: "Treatment Rate", target: 0.70, actual: currentResult.rates.treatmentRate, input: "Consults", output: "Treatments Started", icon: BarChart2 },
-                  { label: "Completion Rate", target: 0.95, actual: currentResult.rates.completionRate, input: "Treatments Started", output: "Completed", icon: ShieldCheck },
+                  { label: "Consult Rate", target: GLOBAL_TARGETS.consultTarget.min, actual: currentResult.rates.consultRate, input: "Inquiries", output: "Consults", icon: EqualApproximatelyIcon },
+                  { label: "Treatment Rate", target: GLOBAL_TARGETS.treatmentTarget.min, actual: currentResult.rates.treatmentRate, input: "Consults", output: "Treatments Started", icon: BarChart2 },
+                  { label: "Completion Rate", target: GLOBAL_TARGETS.completionTarget.min, actual: currentResult.rates.completionRate, input: "Treatments Started", output: "Completed", icon: ShieldCheck },
                 ].map((step, idx) => {
                   const isLeak = step.actual < step.target;
                   const percentage = Math.round(step.actual * 100);
@@ -428,7 +428,7 @@ export default function DiagnosisPage() {
   );
 }
 
-// --- HELPER COMPONENTS ---
+
 
 function InputField({ label, name, value, onChange }: { label: string, name: string, value: any, onChange: any }) {
   return (
